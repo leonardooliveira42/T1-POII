@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Teste interpretador de função </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="./Chart.bundle.min.js"></script>
+
+</head>
+<body>
+     
+    <div class="row painel">
+        <div class="col-4 leitor">
+            <div class="container">
+                <h3 class="m-3 text-center"> Trabalho de PO II</h3>
+                <p class="text-center"> Selecione um método: </p>
+                <div class="accordion" id="accordionDiv">
+                    <button class="btn btn-success btn-block" data-toggle="collapse" data-target="#metodo1" aria-expanded=" " aria-controls="metodo1">  
+                        Método 1</button>
+                    <div id="metodo1" class="collapse" data-parent="#accordionDiv">
+                        <div class="leitura">
+                            <div class="form">
+                                <div class="form-group">
+                                    <label for="funcao1"> Digite a função: </label>
+                                    <input type="text" class="form-control" id="funcao1">
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="inicio1"> Inicio </label>
+                                            <input type="number" class="form-control" id="inicio1">
+                                        </div>
+                                        <div class="col">
+                                            <label for="final1"> Final </label>
+                                            <input type="number" class="form-control" id="final1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <form-group>
+                                    <label for="precisao"> Digite a precisao </label>
+                                    <input type="number" class="form-control" id="precisao">
+                                </form-group>
+                                <button class="btn btn-primary btn-block"> Iniciar método </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-success btn-block" data-toggle="collapse" data-target="#metodo2" aria-expanded=" " aria-controls="metodo2">  
+                        Método 2</button>
+                    <div id="metodo2" class="collapse" data-parent="#accordionDiv">
+                        <div class="leitura">
+                            <div class="form">
+                                <div class="form-group">
+                                    <label for="funcao2"> Digite a função: </label>
+                                    <input type="text" class="form-control" id="funcao2">
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="inicio2"> Inicio </label>
+                                            <input type="number" class="form-control" id="inicio2">
+                                        </div>
+                                        <div class="col">
+                                            <label for="final2"> Final </label>
+                                            <input type="number" class="form-control" id="final2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <form-group>
+                                    <label for="precisao2"> Digite a precisao </label>
+                                    <input type="number" class="form-control" id="precisao2">
+                                </form-group>
+                                <button class="btn btn-primary btn-block"> Iniciar método </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-success btn-block" data-toggle="collapse" data-target="#metodo3" aria-expanded=" " aria-controls="metodo3">  
+                        Método 3</button>
+                    <div id="metodo3" class="collapse" data-parent="#accordionDiv">
+                        <div class="leitura">
+                            <div class="form">
+                                <div class="form-group">
+                                    <label for="funcao3"> Digite a função: </label>
+                                    <input type="text" class="form-control" id="funcao3">
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="inicio3"> Inicio </label>
+                                            <input type="number" class="form-control" id="inicio3">
+                                        </div>
+                                        <div class="col">
+                                            <label for="final3"> Final </label>
+                                            <input type="number" class="form-control" id="final3">
+                                        </div>
+                                    </div>
+                                </div>
+                                <form-group>
+                                    <label for="precisao3"> Digite a precisao </label>
+                                    <input type="number" class="form-control" id="precisao3">
+                                </form-group>
+                                <button class="btn btn-primary btn-block"> Iniciar método </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- FIM DA COLUNA PAINEL -->
+        <!-- COMEÇO DA COLUNA DOS RESULTADOS -->
+        <div class="col result">
+            <div class="container">
+                ble
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="./script.js"></script>
+    <script src="./math.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

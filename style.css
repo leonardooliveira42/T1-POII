@@ -1,0 +1,33 @@
+html, body{
+    height: 100%;
+}
+
+.painel{
+    height: 100%;
+    width: 100%;
+}
+
+.verFuncao{
+    display: none;
+}
+
+.leitura{
+    border: 1px solid gray;
+    padding: 10px;
+}
+
+.card, button{
+    margin-top: 20px;
+}
+
+.esquerda{
+    margin-top: 30px;
+}
+
+.leitor{
+    border-right: 3px solid black;
+}
+
+.result{
+    background: red;
+}
