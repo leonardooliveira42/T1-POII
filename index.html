@@ -54,20 +54,20 @@
                     Busca Dicotômica </button> 
                 <div id="metodo2" class="collapse" data-parent="#accordionDiv">
                     <div class="leitura">
-                        <div class="form">
+                        <form id="dicotomica" class="form">
                             <div class="form-group">
                                 <label for="funcao2"> Digite a função: </label>
-                                <input type="text" class="form-control" id="funcao2">
+                                <input type="text" class="form-control" id="funcao2" value="f(x) = x^2 -3x + 2">
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col">
                                         <label for="inicio2"> Inicio </label>
-                                        <input type="number" class="form-control" id="inicio2">
+                                        <input type="float" class="form-control" id="inicio2" value="-1">
                                     </div>
                                     <div class="col">
                                         <label for="final2"> Final </label>
-                                        <input type="number" class="form-control" id="final2">
+                                        <input type="float" class="form-control" id="final2" value="3">
                                     </div>
                                 </div>
                             </div>
@@ -75,16 +75,16 @@
                                 <div class="row">
                                     <div class="col">
                                         <label for="delta2"> Digite o delta: </label>
-                                        <input type="number" class="form-control" id="delta2">
+                                        <input type="float" class="form-control" id="delta2" value="0.01">
                                     </div>
                                     <div class="col">
                                         <label for="precisao2"> Digite a precisao </label>
-                                        <input type="number" class="form-control" id="precisao2">
+                                        <input type="float" class="form-control" id="precisao2" value="0.1">
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-success btn-block"> Iniciar método </button>
-                        </div>
+                            <button class="btn btn-success btn-block" type="submit" > Iniciar método </button>
+                        </form>
                     </div>
                 </div> <!-- Fim da busca dicotômica -->
                 <!-- ##### Botão da Seção Áuria ##### -->
@@ -92,29 +92,29 @@
                     Seção Áuria </button>
                 <div id="metodo3" class="collapse" data-parent="#accordionDiv">
                     <div class="leitura">
-                        <div class="form">
+                        <form class="form" id="formAurea">
                             <div class="form-group">
                                 <label for="funcao3"> Digite a função: </label>
-                                <input type="text" class="form-control" id="funcao3">
+                                <input type="text" class="form-control" id="funcao3" value="f(x) = x^2 -3x + 2">
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col">
                                         <label for="inicio3"> Inicio </label>
-                                        <input type="number" class="form-control" id="inicio3">
+                                        <input type="float" class="form-control" id="inicio3" value="-1">
                                     </div>
                                     <div class="col">
                                         <label for="final3"> Final </label>
-                                        <input type="number" class="form-control" id="final3">
+                                        <input type="float" class="form-control" id="final3" value="3">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="precisao3"> Digite a precisao </label>
-                                <input type="number" class="form-control" id="precisao3">
+                                <input type="float" class="form-control" id="precisao3" value="0.1">
                             </div>
-                            <button class="btn btn-success btn-block"> Iniciar método </button>
-                        </div>
+                            <button class="btn btn-success btn-block" type="submit"> Iniciar método </button>
+                        </form>
                     </div>
                 </div> <!-- Fim da seção áuria -->
                 <!-- ##### Busca de Fibonacci -->

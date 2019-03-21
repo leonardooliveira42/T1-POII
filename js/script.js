@@ -121,6 +121,154 @@
         document.getElementById(stringID).style.display = "block";
     }
 
+    /** Busca Dicotomica  */
+
+    $('#dicotomica').submit(async function(e) {
+        e.preventDefault();
+        
+        var flida = document.getElementById('funcao2').value; 
+        var minimo = document.getElementById('inicio2').value; 
+        var maximo = document.getElementById('final2').value; 
+        var delta = document.getElementById('delta2').value; 
+        var precisao = document.getElementById('precisao2').value; 
+
+        var funcao = parser.eval(flida);
+
+        minimo = parseFloat(minimo); 
+        maximo = parseFloat(maximo); 
+        delta = parseFloat(delta); 
+        precisao = parseFloat(precisao); 
+
+        await BuscaDicotomica(minimo, maximo, delta, precisao)
+        .then((res) => {
+            console.log(res);
+        });
+    });
+
+    function BuscaDicotomica(minimo, maximo, delta, precisao) {
+        return new Promise(function(resolve, reject) {
+            var iteratorArray = []; 
+            var resultado = CalculoBuscaDicotomica(0,minimo, maximo, delta, precisao, iteratorArray); 
+            var object = {
+                iteracoes: iteratorArray, 
+                resultado: resultado
+            };
+            resolve(object);
+        });
+    }
+
+    function CalculoBuscaDicotomica(k, a, b, delta, precisao, iteracao) {
+        // Primeiro criterio de convergencia 
+        if(IntervaloMaiorQPrecisao(a,b,precisao)){
+            //Se for verdade continua o processo 
+            var meio = Media(a,b); 
+            var x = meio - delta; 
+            var z = meio + delta; 
+
+            var fx = parser.eval('f(' + x + ')');
+            var fz = parser.eval('f(' + z + ')');
+
+            iteracao.push({
+                a: a, 
+                b: b, 
+                x: x, 
+                z: z, 
+                fx: fx, 
+                fz: fz
+            });
+
+            if(fx > fz) {
+                // Se for verdade o a recebe x
+                return CalculoBuscaDicotomica(k++,x,b,delta,precisao,iteracao);
+            } else {
+                // Se for falso o b recebe z
+                return CalculoBuscaDicotomica(k++,a,z,delta,precisao,iteracao);
+            }
+        } else{
+            return Media(a,b);
+        }
+    }
+
+    /** Seção Aurea */
+    
+    $('#formAurea').submit(async function(e) {
+        e.preventDefault();
+        
+        var flida = document.getElementById('funcao3').value; 
+        var minimo = document.getElementById('inicio3').value; 
+        var maximo = document.getElementById('final3').value; 
+        var precisao = document.getElementById('precisao3').value; 
+
+        var funcao = parser.eval(flida);
+
+        minimo = parseFloat(minimo); 
+        maximo = parseFloat(maximo); 
+        precisao = parseFloat(precisao); 
+
+        await SecaoAurea(minimo, maximo, precisao)
+        .then((res) => {
+            console.log(res);
+        })
+
+        console.log(flida, minimo, maximo, precisao);
+
+    })
+
+    function SecaoAurea(minimo, maximo, precisao) {
+        return new Promise (function(resolve, reject) {
+            var iteratorArray = []; 
+            var alfa = math.eval('(-1 + (5)^(1/2))/2');
+            //console.log(alfa);
+            var resultado = CalculoSecaoAurea(0, minimo, maximo, precisao, alfa, iteratorArray);
+            var object = {
+                iteracoes: iteratorArray, 
+                resultado: resultado
+            };
+            resolve(object);
+        });
+    }
+
+    function CalculoSecaoAurea(k, a, b, e, alfa, iteracao){
+
+        if(IntervaloMaiorQPrecisao(a,b,e)){
+            //Se for verdade continua o processo  
+            var u = a + (1 - alfa) * (b - a);
+            var l = a + alfa * (b - a); 
+
+            var fu = parser.eval('f(' + u + ')');
+            var fl = parser.eval('f(' + l + ')');
+
+            iteracao.push({
+                a: a, 
+                b: b, 
+                u: u, 
+                l: l, 
+                fu: fu, 
+                fl: fl
+            });
+
+            if(fu > fl) {
+                // Se for verdade o a recebe x
+                return CalculoSecaoAurea(k++, u, b, e, alfa, iteracao);
+            } else {
+                // Se for falso o b recebe z
+                return CalculoSecaoAurea(k++, a, l, e, alfa, iteracao);
+            }
+        } else{
+            return Media(a,b);
+        }
+    }
+    
+
+    /** Funções de uso geral  */
+    function Media(v1, v2) {
+        var media = (v1 + v2)/2;
+        return media;         
+    }
+
+    function IntervaloMaiorQPrecisao(a, b, e) {
+        return ((b-a) > e);
+    }
     /********* Funções para mostrar resultados **********/
 
     function MostraResultadoUniforme(resultado, funcao, minimo, maximo, delta) {
