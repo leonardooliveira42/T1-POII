@@ -1,0 +1,22 @@
+{
+  "name": "t1-poii",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "electron": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leonerd42/T1-POII.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Leonerd42/T1-POII/issues"
+  },
+  "homepage": "https://github.com/Leonerd42/T1-POII#readme",
+  "dependencies": {
+    "electron": "^4.1.1"
+  }
+}

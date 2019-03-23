@@ -258,7 +258,121 @@
             return Media(a,b);
         }
     }
+
+    /** Busca de Fibonacci */
+    $('#formFibonacci').submit(async function(e) {
+        e.preventDefault();
+
+        var flida = document.getElementById('funcao4').value; 
+        var minimo = document.getElementById('inicio4').value; 
+        var maximo = document.getElementById('final4').value; 
+        var precisao = document.getElementById('precisao4').value; 
+
+        minimo = parseFloat(minimo); 
+        maximo = parseFloat(maximo); 
+        precisao = parseFloat(precisao);
+
+        var funcao = parser.eval(flida);
+
+        await BuscaFibonacci(minimo, maximo, precisao).then((res) => {
+            console.log(res);
+        });
+
+        //console.log(flida, minimo, maximo, precisao);
+    });
     
+    function BuscaFibonacci(minimo, maximo, precisao){
+        return new Promise(function(resolve, reject) {
+            var a = minimo; 
+            var b = maximo;
+            var fn = (b-a)/precisao; 
+            var sequenciaFibo = []; 
+            var iteratorArray = []; 
+
+            // Gerando a sequencia de fibonacci
+            for(i=1; ; i++){
+                var item = Fibonacci(i); 
+                sequenciaFibo.push(item); 
+                if(item > fn) {
+                    break; 
+                }                    
+            }
+            var iteracaoMax = sequenciaFibo.length - 2; 
+            var resultado = CalculoBuscaFibonacci(0,a,b,iteracaoMax, sequenciaFibo, precisao, iteratorArray);
+
+            var object = {
+                iteracoes: iteratorArray, 
+                resultado: resultado
+            };
+            resolve(object);
+        });
+    }
+
+    function CalculoBuscaFibonacci(k, a, b, max, sequenciaFibo, e, iteracao) {
+        // Se atingiu o numero de iterações maximas
+        if(k <= max) {
+
+            var auxU = (sequenciaFibo.length-1)-k-2;
+            var auxL = (sequenciaFibo.length-1)-k-1;
+            var divisor = (sequenciaFibo.length-1)-k;
+            var u = a + (sequenciaFibo[auxU] * (b - a)) / (sequenciaFibo[divisor]);
+            var l = a + (sequenciaFibo[auxL] * (b - a)) / (sequenciaFibo[divisor]);
+
+            var fu = parser.eval('f(' + u + ')'); 
+            var fl = parser.eval('f(' + l + ')');
+
+            var object = {
+                a: a, 
+                b: b,
+                u: u, 
+                l: l, 
+                fu: fu, 
+                fl: fl
+            };
+            iteracao.push(object);
+            if(IntervaloMaiorQPrecisao(a,b,e)) {
+
+                if(fu > fl){
+                    return CalculoBuscaFibonacci(k++, u, b, max, sequenciaFibo, e, iteracao);
+                } else {
+                    return CalculoBuscaFibonacci(k++, a, l, max, sequenciaFibo, e, iteracao);
+                }
+            } else {
+                return Media(a,b);
+            }
+        } else {
+            return Media(a,b);
+        }
+    }
+
+    function Fibonacci(a) {
+        if(a == 1) {
+            return 1;
+        } else if(a == 2){
+            return 1;
+        } else {
+            return Fibonacci(a-1) + Fibonacci(a-2);
+        }
+    }  
+
+    /** Uso de derivada - bisseção */
+    $('#formBissecao').submit(function(e) {
+        e.preventDefault(); 
+        
+        var flida = document.getElementById('funcao5').value; 
+        var minimo = document.getElementById('inicio5').value; 
+        var maximo = document.getElementById('final5').value; 
+        var precisao = document.getElementById('precisao5').value; 
+        
+        var funcao = parser.eval(flida);
+        var derivada = math.derivative(flida, 'x'); 
+
+        var resultado = derivada.eval({x: 4});
+
+        console.log('derivada: ', derivada.toString(), 'resultado ', resultado);
+
+        console.log(flida, minimo, maximo, precisao);
+    });
 
     /** Funções de uso geral  */
     function Media(v1, v2) {
@@ -267,6 +381,7 @@
     }
 
     function IntervaloMaiorQPrecisao(a, b, e) {
+        console.log((b-a) > e);
         return ((b-a) > e);
     }
     /********* Funções para mostrar resultados **********/
