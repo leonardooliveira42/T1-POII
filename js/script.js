@@ -363,11 +363,13 @@
         var minimo = document.getElementById('inicio5').value; 
         var maximo = document.getElementById('final5').value; 
         var precisao = document.getElementById('precisao5').value; 
+
+        minimo = parseFloat(minimo); 
+        maximo = parseFloat(maximo); 
+        precisao = parseFloat(precisao);
         
         var funcao = parser.eval(flida);
         var derivada = math.derivative(flida, 'x'); 
-
-        var resultado = derivada.eval({x: 4});
 
         console.log('derivada: ', derivada.toString(), 'resultado ', resultado);
 
@@ -423,3 +425,19 @@
         $('#uniIteracoes').append('Q. Iterações: ' + resultado.iteracoes.length.toFixed(3));         
 
     }   
+
+    function MostraResultadoDicotomica() {
+
+    }
+
+    function MostraResultadoAurea() {
+        
+    }
+
+    function MostraResultadoFibonacci() {
+        
+    }
+
+    function MostraResultadoBissecao() {
+        
+    }
