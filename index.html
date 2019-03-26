@@ -153,29 +153,29 @@
             <h6> Com uso de derivada </h6>
             <hr>
             <div class="accordion" id="derivadaAccordion">
-                <button class="btn btn-warning btn-block" data-toggle="collapse" data-target="#metodo5"> Método da Bisseção    </button>
+                <button class="btn btn-warning btn-block" onclick="SwitchDiv(5)" data-toggle="collapse" data-target="#metodo5"> Método da Bisseção    </button>
                 <div id="metodo5" class="collapse" data-parent="derivadaAccordion">
                     <div class="leitura">
                         <form id="formBissecao" class="form">
                             <div class="form-group">
                                 <label for="funcao4"> Digite a função: </label>
-                                <input type="text" class="form-control" id="funcao5" value="f(x) = x^2 -3x +2">
+                                <input type="text" class="form-control" id="funcao5" value="f(x) = x^2 +2x">
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col">
                                         <label for="inicio4"> Inicio </label>
-                                        <input type="number" class="form-control" id="inicio5" value="-1">
+                                        <input type="float" class="form-control" id="inicio5" value="-3">
                                     </div>
                                     <div class="col">
                                         <label for="final4"> Final </label>
-                                        <input type="number" class="form-control" id="final5" value="3">
+                                        <input type="float" class="form-control" id="final5" value="6">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="precisao4"> Digite a precisão </label>
-                                <input type="number" class="form-control" id="precisao5" value="0.1">
+                                <input type="float" class="form-control" id="precisao5" value="0.2">
                             </div>
                             <button class="btn btn-success btn-block"> Iniciar método </button>
                         </form>
@@ -279,13 +279,461 @@
             
         </div>
         <div id="divDico">
-            <h1> Dicotomica </h1>
+            <h1 class="display-4 text-center"> Busca Dicotômica </h1>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            Função
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <span id="funcaoObjetivoDico"> Aguardando... </span>
+                                    <p id="restricaoDico"></p>
+                                </div>
+                                <div class="col">
+                                    <span id="deltaDico"></span>
+                                    <p id="precisaoDico"></p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            Gráfico
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div id="graficoDico"></div>
+                                </div>
+                                <div class="col">
+                                    <div id="buttonGraficoDico"> Aguardando... </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- fim da row de cards -->
+
+            <!-- Tabela de iterações -->
+            <h5 class="text-center mt-4"> Tabela de iterações </h5>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> |b - a| >= &epsilon; </th>
+                        <th> x </th>
+                        <th> z </th>
+                        <th> F(x) </th>
+                        <th> F(z) </th>
+                        <th> F(x) > F(z) ?</th>
+                    </thead>
+                    <tbody id="DicoTbody">     
+                        <tr>
+                            <td colspan="5"> Aguardando... </td>
+                        </tr>        
+                    </tbody>    
+                    <tfoot class="table-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> |b - a| >= &epsilon; </th>
+                        <th> x </th>
+                        <th> z </th>
+                        <th> F(x) </th>
+                        <th> F(z) </th>
+                        <th> F(x) > F(z) ?</th>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- Fim do card resultados -->
+            <div class="card text-white bg-success mt-4">
+                <div class="card-header">
+                    <h5> Resultado </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span id="DicoResultado"> Aguardando... </span>
+                        </div>
+                        <div class="col">
+                            <span id="DicoIteracoes"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>      
         </div>
         <div id="divAurea">
-            <h1> Seção Aurea </h1>
+            <h1 class="display-4 text-center"> Seção Aurea </h1>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            Função
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <span id="funcaoObjetivoAurea"> Aguardando... </span>
+                                    <p id="restricaoAurea"></p>
+                                </div>
+                                <div class="col">
+                                    <span id="deltaAurea"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            Gráfico
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div id="graficoAurea"></div>
+                                </div>
+                                <div class="col">
+                                    <div id="buttonGraficoAurea"> Aguardando... </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- fim da row de cards -->
+
+            <!-- Tabela de iterações -->
+            <h5 class="text-center mt-4"> Tabela de iterações </h5>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> |b - a| > &epsilon; ? </th>
+                        <th> &mu; </th>
+                        <th> &lambda; </th>
+                        <th> F(&mu;) </th>
+                        <th> F(&lambda;) </th>
+                        <th> F(&mu;) > F(&lambda;) ?</th>
+                    </thead>
+                    <tbody id="AureaTbody">     
+                        <tr>
+                            <td colspan="5"> Aguardando... </td>
+                        </tr>        
+                    </tbody>    
+                    <tfoot class="table-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> |b - a| > &epsilon; ? </th>
+                        <th> &mu; </th>
+                        <th> &lambda; </th>
+                        <th> F(&mu;) </th>
+                        <th> F(&lambda;) </th>
+                        <th> F(&mu;) > F(&lambda;) ?</th>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- Fim do card resultados -->
+            <div class="card text-white bg-success mt-4">
+                <div class="card-header">
+                    <h5> Resultado </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span id="AureaResultado"> Aguardando... </span>
+                        </div>
+                        <div class="col">
+                            <span id="AureaIteracoes"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>  
         </div>
         <div id="divFibonacci">
-            <h1> Fibonacci </h1>
+            <h1 class="display-4 text-center"> Busca de Fibonacci </h1>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            Função
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <span id="funcaoObjetivoFibo"> Aguardando... </span>
+                                    <p id="restricaoFibo"></p>
+                                </div>
+                                <div class="col">
+                                    <span id="deltaFibo"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            Gráfico
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div id="graficoFibo"></div>
+                                </div>
+                                <div class="col">
+                                    <div id="buttonGraficoFibo"> Aguardando... </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- fim da row de cards -->
+
+            <!-- Tabela de iterações -->
+            <h5 class="text-center mt-4"> Tabela de iterações </h5>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> |b - a| > &epsilon; ? </th>
+                        <th> &mu; </th>
+                        <th> &lambda; </th>
+                        <th> F(&mu;) </th>
+                        <th> F(&lambda;) </th>
+                        <th> F(&mu;) > F(&lambda;) ?</th>
+                    </thead>
+                    <tbody id="FiboTbody">     
+                        <tr>
+                            <td colspan="5"> Aguardando... </td>
+                        </tr>        
+                    </tbody>    
+                    <tfoot class="table-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> |b - a| > &epsilon; ? </th>
+                        <th> &mu; </th>
+                        <th> &lambda; </th>
+                        <th> F(&mu;) </th>
+                        <th> F(&lambda;) </th>
+                        <th> F(&mu;) > F(&lambda;) ?</th>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- Fim do card resultados -->
+            <div class="card text-white bg-success mt-4">
+                <div class="card-header">
+                    <h5> Resultado </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span id="FiboResultado"> Aguardando... </span>
+                        </div>
+                        <div class="col">
+                            <span id="FiboIteracoes"></span>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <div id="divBissecao">
+            <h1 class="display-4 text-center"> Método da Bisseção </h1>
+            <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                Função
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <span id="funcaoObjetivoBisse"> Aguardando... </span>
+                                        <p id="restricaoBisse"></p>
+                                    </div>
+                                    <div class="col">
+                                        <span id="deltaBisse"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <hr>
+                                        <div id="derivadaBissecao">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                Gráfico
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div id="graficoBisse"></div>
+                                    </div>
+                                    <div class="col">
+                                        <div id="buttonGraficoBisse"> Aguardando... </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+            </div> <!-- fim da row de cards -->
+
+            <!-- Tabela de iterações -->
+            <h5 class="text-center mt-4"> Tabela de iterações </h5>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> x </th>
+                        <th> f'(x) </th>
+                    </thead>
+                    <tbody id="BisseTbody">     
+                        <tr>
+                            <td colspan="5"> Aguardando... </td>
+                        </tr>        
+                    </tbody>    
+                    <tfoot class="table-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> x </th>
+                        <th> f'(x) </th>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- Fim do card resultados -->
+            <div class="card text-white bg-success mt-4">
+                <div class="card-header">
+                    <h5> Resultado </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span id="BisseResultado"> Aguardando... </span>
+                        </div>
+                        <div class="col">
+                            <span id="BisseIteracoes"></span>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <div id="divNewton">
+            <h1 class="display-4 text-center"> Método de Newton </h1>
+            <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                Função
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <span id="funcaoObjetivoNewton"> Aguardando... </span>
+                                        <p id="restricaoNewton"></p>
+                                    </div>
+                                    <div class="col">
+                                        <span id="deltaNewton"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <hr>
+                                        <div id="derivadaNewton">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                Gráfico
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div id="graficoNewton"></div>
+                                    </div>
+                                    <div class="col">
+                                        <div id="buttonGraficoNewton"> Aguardando... </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+            </div> <!-- fim da row de cards -->
+
+            <!-- Tabela de iterações -->
+            <h5 class="text-center mt-4"> Tabela de iterações </h5>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> x </th>
+                        <th> f'(x) </th>
+                    </thead>
+                    <tbody id="NewtonTbody">     
+                        <tr>
+                            <td colspan="5"> Aguardando... </td>
+                        </tr>        
+                    </tbody>    
+                    <tfoot class="table-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> x </th>
+                        <th> f'(x) </th>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- Fim do card resultados -->
+            <div class="card text-white bg-success mt-4">
+                <div class="card-header">
+                    <h5> Resultado </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span id="NewtonResultado"> Aguardando... </span>
+                        </div>
+                        <div class="col">
+                            <span id="NewtonIteracoes"></span>
+                        </div>
+                    </div>
+                </div>
+            </div> 
         </div>
     </section>
 
@@ -314,4 +762,5 @@
     
     <script src="./libraries/math.js"></script>
     <script src="./js/script.js"></script>
+    <script src="./js/MostraResultados.js"></script>
 </body>

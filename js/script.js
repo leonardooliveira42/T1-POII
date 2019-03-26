@@ -3,7 +3,7 @@
     var parser = math.parser(); 
     var refinaUni = [];
 
-    // Inicia o método da busca uniforme 
+    /** Busca Uniforme  */
     $('#uniforme').submit(async function(e) {
         e.preventDefault();
         var flida = document.getElementById('funcao1').value; 
@@ -37,7 +37,6 @@
         // Mostra o resultado na tela 
     });
 
-    // Promessa da busca uniforme
     function BuscaUniforme(minimo, maximo, delta) {
         return new Promise(function(resolve, reject) {
             // Vetor de iterações 
@@ -51,7 +50,6 @@
         });
     }
 
-    // Calculo da busca uniforme
     function CalculoBuscaUniforme(iteracao, a, b, del, refina, array) {
 
         var fX = parser.eval('f(' + a + ')');
@@ -90,37 +88,6 @@
         }
     }
 
-    /** Funções para manipular a página */
-    function SwitchDiv(div){
-        var stringID; 
-        switch(div){
-            case 0: 
-                stringID = "tutorial"; 
-                break;
-            case 1: 
-                stringID = "divUniforme";
-                break; 
-            case 2: 
-                stringID = "divDico";
-                break; 
-            case 3: 
-                stringID = "divAurea";
-                break; 
-            case 4:     
-                stringID = "divFibonacci";
-                break; 
-        }
-
-        // Sumindo com todas as divs
-        document.getElementById("tutorial").style.display = "none";
-        document.getElementById("divUniforme").style.display = "none";
-        document.getElementById("divDico").style.display = "none";
-        document.getElementById("divAurea").style.display = "none";
-        document.getElementById("divFibonacci").style.display = "none";
-
-        document.getElementById(stringID).style.display = "block";
-    }
-
     /** Busca Dicotomica  */
 
     $('#dicotomica').submit(async function(e) {
@@ -142,6 +109,7 @@
         await BuscaDicotomica(minimo, maximo, delta, precisao)
         .then((res) => {
             console.log(res);
+            MostraResultadoDicotomica(res ,flida, minimo, maximo, delta, precisao);
         });
     });
 
@@ -185,6 +153,10 @@
                 return CalculoBuscaDicotomica(k++,a,z,delta,precisao,iteracao);
             }
         } else{
+            iteracao.push({
+                a: a, 
+                b: b
+            });
             return Media(a,b);
         }
     }
@@ -208,6 +180,7 @@
         await SecaoAurea(minimo, maximo, precisao)
         .then((res) => {
             console.log(res);
+            MostraResultadoAurea(res, flida, minimo, maximo, precisao);
         })
 
         console.log(flida, minimo, maximo, precisao);
@@ -255,6 +228,10 @@
                 return CalculoSecaoAurea(k++, a, l, e, alfa, iteracao);
             }
         } else{
+            iteracao.push({
+                a: a, 
+                b: b
+            });
             return Media(a,b);
         }
     }
@@ -276,6 +253,8 @@
 
         await BuscaFibonacci(minimo, maximo, precisao).then((res) => {
             console.log(res);
+            MostraResultadoFibonacci(res, flida, minimo, maximo, precisao);
+            
         });
 
         //console.log(flida, minimo, maximo, precisao);
@@ -356,7 +335,7 @@
     }  
 
     /** Uso de derivada - bisseção */
-    $('#formBissecao').submit(function(e) {
+    $('#formBissecao').submit(async function(e) {
         e.preventDefault(); 
         
         var flida = document.getElementById('funcao5').value; 
@@ -371,73 +350,112 @@
         var funcao = parser.eval(flida);
         var derivada = math.derivative(flida, 'x'); 
 
-        console.log('derivada: ', derivada.toString(), 'resultado ', resultado);
+        console.log('derivada: ', derivada.toString());
 
         console.log(flida, minimo, maximo, precisao);
+        await  Bissecao(derivada, minimo, maximo, precisao).then(function(res) {
+            console.log(res); 
+            // Mostra resultados
+            MostraResultadoBissecao(res,flida, derivada, minimo, maximo, precisao);
+
+        })
     });
 
+    function Bissecao(derivada, minimo, maximo, precisao) {
+        return new Promise(function(resolve, reject) {
+            var iteratorArray = []; 
+            var max = Math.log(precisao/(maximo-minimo)) / Math.log(0.5); 
+            max = Math.ceil(max);
+            console.log(max);
+            var resultado = CalculoBissecao(0, max, minimo, maximo, derivada, precisao, iteratorArray);
+            var object = {
+                iteracoes: iteratorArray, 
+                resultado: resultado
+            };
+            resolve(object);
+        });
+    }
+
+    function CalculoBissecao(k, max, a, b, der, e, iteracao) {
+        var x = Media(a,b); 
+        var resDerivada = der.eval({x: x});
+        if(k < max) {           
+            // Salvando a iteração
+            iteracao.push({
+                a: a, 
+                b: b, 
+                x: x, 
+                flx: resDerivada
+            });
+            if (resDerivada > 0) {
+                return CalculoBissecao(++k, max, a, x, der, e, iteracao);
+            } else if (resDerivada < 0) {
+                return CalculoBissecao(++k, max, x, b, der, e, iteracao);
+            } else return x;
+        } else return x;
+    }
+
+    /*** Método do Newton */
+
+    $('#formNewton').submit(async function(e) {
+        e.preventDefault();
+
+
+    });
+
+    function Newton() {
+        return new Promise(function(resolve, reject) {
+
+            var object = {};
+            resolve(object);
+        });
+    }   
+
+    function CalculoNewton() {
+
+    }
+
     /** Funções de uso geral  */
+    function SwitchDiv(div){
+        var stringID; 
+        switch(div){
+            case 0: 
+                stringID = "tutorial"; 
+                break;
+            case 1: 
+                stringID = "divUniforme";
+                break; 
+            case 2: 
+                stringID = "divDico";
+                break; 
+            case 3: 
+                stringID = "divAurea";
+                break; 
+            case 4:     
+                stringID = "divFibonacci";
+            case 5: 
+                stringID = "divBissecao";
+                break; 
+        }
+
+        // Sumindo com todas as divs
+        document.getElementById("tutorial").style.display = "none";
+        document.getElementById("divUniforme").style.display = "none";
+        document.getElementById("divDico").style.display = "none";
+        document.getElementById("divAurea").style.display = "none";
+        document.getElementById("divFibonacci").style.display = "none";
+        document.getElementById("divBissecao").style.display = "none";
+
+        document.getElementById(stringID).style.display = "block";
+    }
+
     function Media(v1, v2) {
         var media = (v1 + v2)/2;
         return media;         
     }
 
     function IntervaloMaiorQPrecisao(a, b, e) {
-        console.log((b-a) > e);
+        // console.log((b-a) > e);
         return ((b-a) > e);
     }
-    /********* Funções para mostrar resultados **********/
-
-    function MostraResultadoUniforme(resultado, funcao, minimo, maximo, delta) {
-
-        //Mostrando os dados nos cards 
-        $('#funcaoObjetivoUni').empty(); 
-        $('#funcaoObjetivoUni').append('<strong>' + funcao + '</strong>');
-        $('#restricaoUni').empty(); 
-        $('#restricaoUni').append('s.a: ' + minimo + '<= x <= ' + maximo);
-        $('#deltaUni').empty(); 
-        $('#deltaUni').append('&Delta; = ' + delta); 
-
-        // Adicionando uma imagem e botão no card do gráfico 
-        $('#graficoUni').empty(); 
-        $('#graficoUni').append("<img src='./imgs/Grafico.jpg' class='img-fluid mx-auto imagemGrafico'>");
-        $('#buttonGraficoUni').empty(); 
-        $('#buttonGraficoUni').append("<button class='btn btn-info btn-block' data-toggle='modal' data-target='.bd-example-modal-xl'> Ver Gráfico </button>")
-
-        //Tabela de resultados 
-        $('#uniformeTbody').empty();
-
-        resultado.iteracoes.forEach(function(item, index) {
-            $('#uniformeTbody').append("<tr class='table-warning'>");
-            $('#uniformeTbody').append('<td> ' + index + ' </td>');
-            $('#uniformeTbody').append('<td> ' + item.x.toFixed(4) + ' </td>');
-            $('#uniformeTbody').append('<td> ' + item.fx.toFixed(4) + ' </td>');
-            $('#uniformeTbody').append('<td> ' + item.xk.toFixed(4) + ' </td>');
-            $('#uniformeTbody').append('<td> ' + item.fxk.toFixed(4) + ' </td>');     
-            $('#uniformeTbody').append('<td> ' + ((item.fx < item.fxk) ? 'Verdade' : 'Falso') + ' </td>');
-            $('#uniformeTbody').append('</tr>');
-        });     
-
-        // Resultado final 
-        $('#uniResultado').empty(); 
-        $('#uniResultado').append('x<sup>*</sup> = ' + resultado.resultado);
-        $('#uniIteracoes').empty(); 
-        $('#uniIteracoes').append('Q. Iterações: ' + resultado.iteracoes.length.toFixed(3));         
-
-    }   
-
-    function MostraResultadoDicotomica() {
-
-    }
-
-    function MostraResultadoAurea() {
-        
-    }
-
-    function MostraResultadoFibonacci() {
-        
-    }
-
-    function MostraResultadoBissecao() {
-        
-    }
+   

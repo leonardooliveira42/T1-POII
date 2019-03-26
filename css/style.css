@@ -52,7 +52,7 @@ button{
 }
 
 /* iniciando a página */
-#divUniforme, #divDico, #divAurea, #tutorial{
+#divUniforme, #divDico, #divAurea, #divFibonacci, #tutorial{
     display: none;
 }
 
