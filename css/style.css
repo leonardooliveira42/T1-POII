@@ -52,8 +52,12 @@ button{
 }
 
 /* iniciando a página */
-#divUniforme, #divDico, #divAurea, #divFibonacci, #tutorial{
+#divUniforme, #divDico, #divAurea, #divFibonacci, #divBissecao, #divNewton{
     display: none;
+}
+
+#exampleButton{
+    float: right;
 }
 
 .lineWarning{
@@ -69,4 +73,17 @@ button{
     height: 300px;
     width: 200px; 
     background: black;
+}
+
+.space{
+    margin-top: 40px;
+}
+
+
+.foto{
+    margin: 0px;
+}
+
+.card{
+    padding: 0px;
 }

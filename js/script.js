@@ -400,19 +400,78 @@
     $('#formNewton').submit(async function(e) {
         e.preventDefault();
 
+        var flida = document.getElementById('funcao6').value; 
+        var minimo = document.getElementById('inicio6').value; 
+        var maximo = document.getElementById('final6').value; 
+        var precisao = document.getElementById('precisao6').value; 
+
+        minimo = parseFloat(minimo); 
+        maximo = parseFloat(maximo); 
+        precisao = parseFloat(precisao);
+        
+        var funcao = parser.eval(flida);
+        var derivada = math.derivative(flida, 'x');
+        var derivadaSegunda = math.derivative(derivada, 'x');
+
+
+        console.log(flida, minimo, maximo, precisao);
+        //console.log('derivada: ', derivada.toString(), 'segunda: ', derivadaSegunda.toString()); 
+        await Newton(derivada, derivadaSegunda, minimo, maximo, precisao).then(function(res) {
+            console.log(res);
+
+            // Mostra Resultados
+            MostraResultadoNewton(res, flida, derivada, derivadaSegunda, minimo, maximo, precisao);
+        });
+
 
     });
 
-    function Newton() {
+    function Newton(derivada1, derivada2, minimo, maximo, precisao) {
         return new Promise(function(resolve, reject) {
 
-            var object = {};
+            var iteratorArray = [];
+            var resultado = CalculoNewton(0, minimo, maximo, derivada1, derivada2, precisao, iteratorArray);
+            var object = {
+                iteracoes: iteratorArray,
+                resultado: resultado
+            };
             resolve(object);
         });
     }   
 
-    function CalculoNewton() {
+    function CalculoNewton(k, a, b, der1, der2, e, iteracao) {
 
+        var x0 = a; 
+        var d1x0 = der1.eval({x: x0});
+        var d2x0 = der2.eval({x: x0});
+        
+        var x1 = x0 - (d1x0 / d2x0);
+        var d1x1 = der1.eval({x: x1});
+
+        iteracao.push({
+            a: a, 
+            b: b, 
+            x0: x0, 
+            x1: x1,
+            d1x0: d1x0, 
+            d2x0: d2x0, 
+            d1x1: d1x1
+        });
+
+        // Primeiro critério de parada 
+        if(Math.abs(d1x1) > e) {
+            //continua
+            // Segundo critério de parada 
+            if(CriterioParadaNewton(x0,x1,e)){
+                // Continua 
+                return CalculoNewton(k++, x1, b, der1, der2, e, iteracao);
+            }else return x1; 
+        } else return x1;
+    }
+
+    function CriterioParadaNewton(x0, x1, e) {
+       var c = (Math.abs(x1 - x0) / ((Math.abs(x1) < 1) ? 1 : Math.abs(x1)));
+       return c > e;
     }
 
     /** Funções de uso geral  */
@@ -433,9 +492,12 @@
                 break; 
             case 4:     
                 stringID = "divFibonacci";
+                break;
             case 5: 
                 stringID = "divBissecao";
                 break; 
+            case 6: 
+                stringID = "divNewton";
         }
 
         // Sumindo com todas as divs
@@ -445,6 +507,7 @@
         document.getElementById("divAurea").style.display = "none";
         document.getElementById("divFibonacci").style.display = "none";
         document.getElementById("divBissecao").style.display = "none";
+        document.getElementById("divNewton").style.display = "none";
 
         document.getElementById(stringID).style.display = "block";
     }
@@ -458,4 +521,48 @@
         // console.log((b-a) > e);
         return ((b-a) > e);
     }
+
+    // Preenchendo os campos com os exemplos da sala de aula 
+    document.getElementById('exampleButton').addEventListener('click', function(e) {
+        console.log('opa');
+        // Busca Uniforme 
+        document.getElementById('funcao1').value = 'f(x) = x^2 -3x +2';
+        document.getElementById('inicio1').value = '-1';
+        document.getElementById('final1').value = '3';
+        document.getElementById('delta1').value = '0.5';
+
+        // Busca Dicotômica 
+        document.getElementById('funcao2').value = 'f(x) = x^2 -3x +2';
+        document.getElementById('inicio2').value = '-1';
+        document.getElementById('final2').value = '3';
+        document.getElementById('delta2').value = '0.01';
+        document.getElementById('precisao2').value = '0.1';
+
+        // Seção Aurea 
+        document.getElementById('funcao3').value = 'f(x) = x^2 -3x +2';
+        document.getElementById('inicio3').value = '-1';
+        document.getElementById('final3').value = '3';
+        document.getElementById('precisao3').value = '0.1';
+
+        // Seção Fibonacci 
+        document.getElementById('funcao4').value = 'f(x) = x^2 -3x +2';
+        document.getElementById('inicio4').value = '-1';
+        document.getElementById('final4').value = '3';
+        document.getElementById('precisao4').value = '0.1';
+
+        // Método da bisseção 
+        document.getElementById('funcao5').value = 'f(x) = x^2 +2x';
+        document.getElementById('inicio5').value = '-3';
+        document.getElementById('final5').value = '6';
+        document.getElementById('precisao5').value = '0.2';
+
+        // Método de Newton
+        document.getElementById('funcao6').value = 'f(x) = e^x - x^3 + 1';
+        document.getElementById('inicio6').value = '-1';
+        document.getElementById('final6').value = '6';
+        document.getElementById('precisao6').value = '0.0001';
+
+
+
+    });
    

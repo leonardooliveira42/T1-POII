@@ -151,7 +151,7 @@ function MostraResultadoFibonacci(resultado, funcao, minimo, maximo, precisao) {
 }
 
 function MostraResultadoBissecao(resultado, funcao, derivada, minimo, maximo, precisao) {
-    console.log('mostrando os resultados de fibonacci ');
+    console.log('mostrando os resultados de bissecao ');
     // Dados essenciais 
     $('#funcaoObjetivoBisse').empty(); 
     $('#funcaoObjetivoBisse').append('<strong>' + funcao + '</strong>');
@@ -183,11 +183,59 @@ function MostraResultadoBissecao(resultado, funcao, derivada, minimo, maximo, pr
     $('#BisseResultado').empty(); 
     $('#BisseResultado').append('x<sup>*</sup> = ' + resultado.resultado.toFixed(4));
     $('#BisseIteracoes').empty(); 
-    $('#BisseIteracoes').append('Q. Iterações: ' + resultado.iteracoes.length.toFixed(3));   
-
-    
+    $('#BisseIteracoes').append('Q. Iterações: ' + resultado.iteracoes.length.toFixed(3));    
 }
 
-function MostraResultadoNewton() {
-    
+function MostraResultadoNewton(resultado, funcao, derivada1, derivada2, minimo, maximo, precisao) {
+    console.log('mostrando os resultados de newton ');
+    // Dados essenciais 
+    $('#funcaoObjetivoNewton').empty(); 
+    $('#funcaoObjetivoNewton').append('<strong>' + funcao + '</strong>');
+    $('#restricaoNewton').empty(); 
+    $('#restricaoNewton').append('s.a: ' + minimo + '<= x <= ' + maximo);
+    $('#deltaNewton').empty(); 
+    $('#deltaNewton').append('&epsilon; = ' + precisao); 
+
+    $('#derivada1Newton').empty(); 
+    $('#derivada1Newton').append('<p> f\'(x) = ' + derivada1.toString() + ' </p>'); 
+    $('#derivada2Newton').empty(); 
+    $('#derivada2Newton').append('<p> f\"(x) = ' + derivada2.toString() + ' </p>'); 
+
+    // Gráfico 
+
+    // Tabela de resultados 
+    $('#NewtonTbody').empty();
+    resultado.iteracoes.forEach(function(item, index) {
+        //console.log(typeof item.z); 
+
+        /**<th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> x<sub>k</sub> </th>
+                        <th> f'(x<sub>k</sub>) </th>
+                        <th> f"(x<sub>k</sub>) </th>
+                        <th> x<sub>k+1</sub> </th>
+                        <th> f'(x<sub>k+1</sub>) </th>
+                        <th> C1 ?  </th>
+                        <th> C2 ? </th> */
+        $('#NewtonTbody').append("<tr class='table-warning'>");
+        $('#NewtonTbody').append('<td> ' + index + ' </td>');
+        $('#NewtonTbody').append('<td> ' + item.a.toFixed(4) + ' </td>');
+        $('#NewtonTbody').append('<td> ' + item.b.toFixed(4) + ' </td>');
+        $('#NewtonTbody').append('<td> ' + item.x0.toFixed(4) + ' </td>');
+        $('#NewtonTbody').append('<td> ' + item.d1x0.toFixed(4) + ' </td>');
+        $('#NewtonTbody').append('<td> ' + item.d2x0.toFixed(4) + ' </td>');
+        $('#NewtonTbody').append('<td> ' + item.x1.toFixed(4) + ' </td>');
+        $('#NewtonTbody').append('<td> ' + item.d1x1.toFixed(4) + ' </td>');
+        $('#NewtonTbody').append('<td> ' + ((Math.abs(item.d1x1) < precisao) ? 'V' : 'F') + ' </td>');
+        $('#NewtonTbody').append('<td> ' + ( (Math.abs(item.x1 - item.x0) / ((Math.abs(item.x1) < 1) ? 1 : Math.abs(item.x1)) < precisao ? 'V' : 'F')) + ' </td>');
+        $('#NewtonTbody').append('</tr>');
+    }); 
+
+    // Resultado final 
+    $('#NewtonResultado').empty(); 
+    $('#NewtonResultado').append('x<sup>*</sup> = ' + resultado.resultado.toFixed(6));
+    $('#NewtonIteracoes').empty(); 
+    $('#NewtonIteracoes').append('Q. Iterações: ' + resultado.iteracoes.length.toFixed(3));   
+
 }
