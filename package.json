@@ -1,22 +1,51 @@
 {
-  "name": "t1-poii",
+  "name": "trabalho-po-ii",
   "version": "1.0.0",
-  "description": "",
+  "description": "Implementaçao de métodos de programação linear inteira",
   "main": "index.js",
   "scripts": {
-    "electron": "electron ."
-  },
-  "repository": {
+    "electron": "electron .",
+    "start": "npm install && electron ./app", 
+    "pack": "build --dir", 
+    "dist": "build"
+  }, "build": {
+    "appId": "trabPo.app",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "portable",
+      "icon": "build/icone.ico"
+    }
+  }, "repository": {
     "type": "git",
     "url": "git+https://github.com/Leonerd42/T1-POII.git"
   },
-  "author": "",
+  "author": "Leonardo Oliveira, Tania Sania, Pedro Barros",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Leonerd42/T1-POII/issues"
   },
   "homepage": "https://github.com/Leonerd42/T1-POII#readme",
-  "dependencies": {
-    "electron": "^4.1.1"
+  "dependencies": {},
+  "devDependencies": {
+    "electron-builder": "^20.39.0"
   }
 }
