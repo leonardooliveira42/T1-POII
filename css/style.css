@@ -38,6 +38,9 @@ header {
     right: 0;
     padding: 20px;
 }  
+.infoIcon{
+    font-size: 20px;
+}
 
 button{
     margin-top: 10px;
@@ -56,7 +59,7 @@ button{
 }
 
 /* Alertas  */
-#alertFormUniforme{
+#alertFormUniforme, #alertFormDico, #alertFormAurea, #alertFormFibo, #alertFormBisse, #alertFormNewton{
     display: none;
 }
 

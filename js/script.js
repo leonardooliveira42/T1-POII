@@ -10,6 +10,7 @@
         var minimo = document.getElementById('inicio1').value; 
         var maximo = document.getElementById('final1').value; 
         var delta = document.getElementById('delta1').value;
+        refinaUni = [];
 
         // Verificar se haverá erros na execução do código 
         try{
@@ -36,11 +37,17 @@
                 throw  'não é um numero';
             }
 
+            if(delta < 0 || delta > 1){
+                throw 'delta inválido';
+            }
+
+            var refina = document.getElementById('qtdRefina').value;
+
             // Desligando o alerta 
             document.getElementById('alertFormUniforme').style.display = 'none';
 
             // Iniciando o método 
-            var result = await BuscaUniforme(minimo, maximo, delta)
+            var result = await BuscaUniforme(refina, minimo, maximo, delta)
             .then(resultado => {
                 MostraResultadoUniforme(resultado, flida, minimo, maximo, delta);
             });     
@@ -50,11 +57,11 @@
         }   
     });
 
-    function BuscaUniforme(minimo, maximo, delta) {
+    function BuscaUniforme(refina, minimo, maximo, delta) {
         return new Promise(function(resolve, reject) {
             // Vetor de iterações 
             var iteratorArray = [];
-            var resultado = CalculoBuscaUniforme(0, minimo, maximo, delta, 1, iteratorArray);
+            var resultado = CalculoBuscaUniforme(0, minimo, maximo, delta, refina, iteratorArray);
             var object = {
                 iteracoes: iteratorArray, 
                 resultado: resultado
@@ -112,18 +119,44 @@
         var delta = document.getElementById('delta2').value; 
         var precisao = document.getElementById('precisao2').value; 
 
-        var funcao = parser.eval(flida);
+        try{
+            var funcao = parser.eval(flida);
 
-        minimo = parseFloat(minimo); 
-        maximo = parseFloat(maximo); 
-        delta = parseFloat(delta); 
-        precisao = parseFloat(precisao); 
+            minimo = minimo.replace(',','.'); 
+            minimo = parseFloat(minimo); 
+            maximo = maximo.replace(',','.'); 
+            maximo = parseFloat(maximo); 
+            delta = delta.replace(',','.'); 
+            delta = parseFloat(delta); 
+            precisao = precisao.replace(',','.');
+            precisao = parseFloat(precisao);    
 
-        await BuscaDicotomica(minimo, maximo, delta, precisao)
-        .then((res) => {
-            console.log(res);
-            MostraResultadoDicotomica(res ,flida, minimo, maximo, delta, precisao);
-        });
+           // Inverte valor de maximo e minimo se max for menor que minimo
+           var obj = {min: minimo, max: maximo};
+           TrocaIntervalo(obj);       
+           minimo = obj.min; maximo = obj.max;
+
+           // Se os dados não forem válidos, não executa o algoritmo
+            if(isNaN(minimo) || isNaN(maximo) || isNaN(delta)){
+                throw  'não é um numero';
+            }
+
+            if((delta < 0 || delta > 1) || (precisao < 0 || precisao > 1)){
+                throw 'delta ou precisao inválido';
+            }
+            // Desligando o alerta 
+            document.getElementById('alertFormDico').style.display = 'none';
+
+            await BuscaDicotomica(minimo, maximo, delta, precisao)
+            .then((res) => {
+                console.log(res);
+                MostraResultadoDicotomica(res ,flida, minimo, maximo, delta, precisao);
+            });
+
+        } catch (e){
+            console.log(e);
+            document.getElementById('alertFormDico').style.display = 'block';
+        }       
     });
 
     function BuscaDicotomica(minimo, maximo, delta, precisao) {
@@ -184,17 +217,43 @@
         var maximo = document.getElementById('final3').value; 
         var precisao = document.getElementById('precisao3').value; 
 
-        var funcao = parser.eval(flida);
+       try{
+            var funcao = parser.eval(flida);
 
-        minimo = parseFloat(minimo); 
-        maximo = parseFloat(maximo); 
-        precisao = parseFloat(precisao); 
+            minimo = minimo.replace(',','.'); 
+            minimo = parseFloat(minimo); 
+            maximo = maximo.replace(',','.'); 
+            maximo = parseFloat(maximo); 
+            precisao = precisao.replace(',','.');
+            precisao = parseFloat(precisao); 
 
-        await SecaoAurea(minimo, maximo, precisao)
-        .then((res) => {
-            console.log(res);
-            MostraResultadoAurea(res, flida, minimo, maximo, precisao);
-        })
+            // Inverte valor de maximo e minimo se max for menor que minimo
+            var obj = {min: minimo, max: maximo};
+            TrocaIntervalo(obj);       
+            minimo = obj.min; maximo = obj.max;
+
+            // Se os dados não forem válidos, não executa o algoritmo
+            if(isNaN(minimo) || isNaN(maximo) || isNaN(precisao)){
+                throw  'não é um numero';
+            }
+
+            if(precisao < 0 || precisao > 1){
+                throw 'precisao inválido';
+            }
+
+            // Desligando o alerta 
+            document.getElementById('alertFormAurea').style.display = 'none';
+
+            await SecaoAurea(minimo, maximo, precisao)
+            .then((res) => {
+                console.log(res);
+                MostraResultadoAurea(res, flida, minimo, maximo, precisao);
+            });
+        } catch (e) {
+            console.log(e);
+            document.getElementById('alertFormAurea').style.display = 'block';
+
+        }
 
         console.log(flida, minimo, maximo, precisao);
 
@@ -258,17 +317,41 @@
         var maximo = document.getElementById('final4').value; 
         var precisao = document.getElementById('precisao4').value; 
 
-        minimo = parseFloat(minimo); 
-        maximo = parseFloat(maximo); 
-        precisao = parseFloat(precisao);
+        try {
+            minimo = minimo.replace(',','.');
+            minimo = parseFloat(minimo); 
+            maximo = maximo.replace(',','.'); 
+            maximo = parseFloat(maximo); 
+            precisao = precisao.replace(',','.'); 
+            precisao = parseFloat(precisao);
 
-        var funcao = parser.eval(flida);
+            var funcao = parser.eval(flida);
 
-        await BuscaFibonacci(minimo, maximo, precisao).then((res) => {
-            console.log(res);
-            MostraResultadoFibonacci(res, flida, minimo, maximo, precisao);
-            
-        });
+            var obj = {min: minimo, max: maximo};
+            TrocaIntervalo(obj);       
+            minimo = obj.min; maximo = obj.max;
+
+            // Se os dados não forem válidos, não executa o algoritmo
+            if(isNaN(minimo) || isNaN(maximo) || isNaN(precisao)){
+                throw  'não é um numero';
+            }
+
+            if(precisao < 0 || precisao > 1){
+                throw 'precisao inválido';
+            }
+
+            document.getElementById('alertFormFibo').style.display = 'none';
+
+
+            await BuscaFibonacci(minimo, maximo, precisao).then((res) => {
+                console.log(res);
+                MostraResultadoFibonacci(res, flida, minimo, maximo, precisao);
+                
+            });
+        } catch (e) {
+            console.log(e);
+            document.getElementById('alertFormFibo').style.display = 'block';
+        }
 
         //console.log(flida, minimo, maximo, precisao);
     });
@@ -356,22 +439,42 @@
         var maximo = document.getElementById('final5').value; 
         var precisao = document.getElementById('precisao5').value; 
 
-        minimo = parseFloat(minimo); 
-        maximo = parseFloat(maximo); 
-        precisao = parseFloat(precisao);
-        
-        var funcao = parser.eval(flida);
-        var derivada = math.derivative(flida, 'x'); 
+        try {
+            minimo = minimo.replace(',','.'); 
+            minimo = parseFloat(minimo); 
+            maximo = maximo.replace(',','.'); 
+            maximo = parseFloat(maximo); 
+            precisao = precisao.replace(',','.'); 
+            precisao = parseFloat(precisao);
 
-        console.log('derivada: ', derivada.toString());
+            // Inverte valor de maximo e minimo se max for menor que minimo
+            var obj = {min: minimo, max: maximo};
+            TrocaIntervalo(obj);       
+            minimo = obj.min; maximo = obj.max;
 
-        console.log(flida, minimo, maximo, precisao);
-        await  Bissecao(derivada, minimo, maximo, precisao).then(function(res) {
-            console.log(res); 
-            // Mostra resultados
-            MostraResultadoBissecao(res,flida, derivada, minimo, maximo, precisao);
+            // Se os dados não forem válidos, não executa o algoritmo
+            if(isNaN(minimo) || isNaN(maximo) || isNaN(precisao)){
+                throw  'não é um numero';
+            }
 
-        })
+            if(precisao < 0 || precisao > 1){
+                throw 'precisao inválido';
+            }
+            
+            var funcao = parser.eval(flida);
+            var derivada = math.derivative(flida, 'x'); 
+
+            // Desligando o alerta 
+            document.getElementById('alertFormBisse').style.display = 'none';
+
+            await  Bissecao(derivada, minimo, maximo, precisao).then(function(res) {
+                // Mostra resultados
+                MostraResultadoBissecao(res,flida, derivada, minimo, maximo, precisao);
+            });
+        }catch (e){
+            console.log(e);
+            document.getElementById('alertFormBisse').style.display = 'block';
+        }
     });
 
     function Bissecao(derivada, minimo, maximo, precisao) {
@@ -418,25 +521,45 @@
         var maximo = document.getElementById('final6').value; 
         var precisao = document.getElementById('precisao6').value; 
 
-        minimo = parseFloat(minimo); 
-        maximo = parseFloat(maximo); 
-        precisao = parseFloat(precisao);
-        
-        var funcao = parser.eval(flida);
-        var derivada = math.derivative(flida, 'x');
-        var derivadaSegunda = math.derivative(derivada, 'x');
+        try {
+            minimo = minimo.replace(',','.');
+            minimo = parseFloat(minimo); 
+            maximo = maximo.replace(',','.'); 
+            maximo = parseFloat(maximo); 
+            precisao = precisao.replace(',','.');
+            precisao = parseFloat(precisao);
 
+            // Inverte valor de maximo e minimo se max for menor que minimo
+            var obj = {min: minimo, max: maximo};
+            TrocaIntervalo(obj);       
+            minimo = obj.min; maximo = obj.max;
 
-        console.log(flida, minimo, maximo, precisao);
-        //console.log('derivada: ', derivada.toString(), 'segunda: ', derivadaSegunda.toString()); 
-        await Newton(derivada, derivadaSegunda, minimo, maximo, precisao).then(function(res) {
-            console.log(res);
+            // Se os dados não forem válidos, não executa o algoritmo
+            if(isNaN(minimo) || isNaN(maximo) || isNaN(precisao)){
+                throw  'não é um numero';
+            }
 
-            // Mostra Resultados
-            MostraResultadoNewton(res, flida, derivada, derivadaSegunda, minimo, maximo, precisao);
-        });
+            if(precisao < 0 || precisao > 1){
+                throw 'precisao inválido';
+            }
+            
+            var funcao = parser.eval(flida);
+            var derivada = math.derivative(flida, 'x');
+            var derivadaSegunda = math.derivative(derivada, 'x');
 
+            // Desligando o alerta 
+            document.getElementById('alertFormNewton').style.display = 'none';
 
+            await Newton(derivada, derivadaSegunda, minimo, maximo, precisao).then(function(res) {
+                console.log(res);
+
+                // Mostra Resultados
+                MostraResultadoNewton(res, flida, derivada, derivadaSegunda, minimo, maximo, precisao);
+            });
+        } catch (e) {
+            console.log(e);
+            document.getElementById('alertFormNewton').style.display = 'block';
+        }
     });
 
     function Newton(derivada1, derivada2, minimo, maximo, precisao) {
@@ -587,3 +710,11 @@
 
     });
    
+
+    // Popover functions
+
+    $("[data-toggle=popover]").popover();
+
+    $('.popover-dismiss').popover({
+        trigger: 'focus'
+    });

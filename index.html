@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./libraries/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/style.css">
     <script src="./libraries/Chart.bundle.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 </head>
 <body>
     <header>
@@ -17,7 +18,7 @@
                 <h1 > <i class="fas fa-home" onclick="SwitchDiv(0)"></i> Pesquisa Operacional II  </h1>
             </div>
             <div class="col">
-                <button class="btn btn-danger" id="exampleButton"> Exemplos <i class="fas fa-pencil-alt"></i> </button>
+                <button class="btn btn-danger" id="exampleButton" > Exemplos <i class="fas fa-pencil-alt"></i> </button>
             </div>
         </div>
     </header>
@@ -52,6 +53,10 @@
                             <div class="form-group">
                                 <label for="delta1"> Digite o delta: </label>
                                 <input type="text" class="form-control" id="delta1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="qtdRefina"> Qtd. de vezes para refinar </label>
+                                <input type="number" min='0' max='3' name="" id="qtdRefina" value = '1'> <i class="far fa-question-circle infoIcon" role="button" data-toggle="popover" title="Busca refinada" data-content="Aqui você pode digitar a quantidade de vezes que o delta será divido por 10 para refinar a busca. Porém o máximo de vezes permitido por esse programa é 3 vezes. "></i>
                             </div>
                             <div class="alert alert-danger" id="alertFormUniforme"> Entrada de dados inválida! </div>
                             <button class="btn btn-success btn-block" type="submit"> Iniciar método </button>
@@ -92,13 +97,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="alert alert-danger" id="alertFormDico"> Entrada de dados inválida! </div>
                             <button class="btn btn-success btn-block" type="submit" > Iniciar método </button>
                         </form>
                     </div>
                 </div> <!-- Fim da busca dicotômica -->
                 <!-- ##### Botão da Seção Áuria ##### -->
                 <button class="btn btn-info btn-block" onclick="SwitchDiv(3)" data-toggle="collapse" data-target="#metodo3" aria-expanded=" " aria-controls="metodo3">  
-                    Seção Áuria </button>
+                    Seção Áurea </button>
                 <div id="metodo3" class="collapse" data-parent="#accordionDiv">
                     <div class="leitura">
                         <form class="form" id="formAurea">
@@ -122,6 +128,7 @@
                                 <label for="precisao3"> Digite a precisao </label>
                                 <input type="text" class="form-control" id="precisao3">
                             </div>
+                            <div class="alert alert-danger" id="alertFormAurea"> Entrada de dados inválida! </div>
                             <button class="btn btn-success btn-block" type="submit"> Iniciar método </button>
                         </form>
                     </div>
@@ -152,6 +159,7 @@
                                 <label for="precisao4"> Digite o intervalo de incerteza (L) </label>
                                 <input type="text" class="form-control" id="precisao4">
                             </div>
+                            <div class="alert alert-danger" id="alertFormFibo"> Entrada de dados inválida! </div>
                             <button class="btn btn-success btn-block"> Iniciar método </button>
                         </form>
                     </div>
@@ -185,6 +193,7 @@
                                 <label for="precisao5"> Digite a precisão </label>
                                 <input type="float" class="form-control" id="precisao5">
                             </div>
+                            <div class="alert alert-danger" id="alertFormBisse"> Entrada de dados inválida! </div>
                             <button class="btn btn-success btn-block"> Iniciar método </button>
                         </form>
                     </div>
@@ -213,6 +222,7 @@
                                 <label for="precisao6"> Digite a precisão </label>
                                 <input type="float" class="form-control" id="precisao6">
                             </div>
+                            <div class="alert alert-danger" id="alertFormNewton"> Entrada de dados inválida! </div>
                             <button class="btn btn-success btn-block" type="submit"> Iniciar método </button>
                         </form>
                     </div>
@@ -244,6 +254,63 @@
                 <li class="list-group-item"> Método da Bisseção </li>
                 <li class="list-group-item"> Método de Newton </li>
             </ul>
+
+            <h4 class="text-center  mt-5"> Instruções </h4>
+
+            <p> 
+                Na barra lateral estão os botões com o nome de cada método. Quando clicado um pequeno 
+                formulário aparece para que seja feita a inserção dos dados. 
+            </p>
+            <p>
+                Preencha a função no formato <span> f(x) = x ^2 </span> (por exemplo). Coloque os valores do intervalo, onde a busca
+                deve ser feita, e o delta e/ou a precisão. 
+            </p>
+            <p>
+                Caso algo esteja errado, uma mensagem como a seguir irá aparecer: 
+            </p>
+            <div class="alert alert-danger"> Entrada de dados inválida! </div>
+            <p> Caso o inicio seja maior que o final, esses valores serão invertidos. <strong> O delta e/ou a precisão devem estar entre 0 e 1. </strong></p>
+
+            <h6> Exemplos de sala de aula </h6>
+
+            <p> Para preencher automaticamente com os exemplos dados na sala de aula, clique no botão "Exemplos" no lado superior direito
+                que todos os campos dos formulários de todos os métodos serão preenchidos automaticamente. 
+            </p>
+
+            <table class="table table-bordered table-hover">
+                <caption> Exemplos de sala de aula </caption>
+                <thead class="thead-dark">
+                    <tr>
+                        <th> Busca Uniforme </th>
+                        <th> Busca Dicotômica </th>
+                        <th> Método da Seção Áurea</th>
+                        <th> Busca de Fibonacci </th>
+                        <th> Método da Bisseção </th>
+                        <th> Método de Newton </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4" class="text-center math">
+                            <p>  \( f(x) = x^2 + 3x + 2 \)   </p> 
+                            <p> \( s.a: -1 <= x <= 3 \) </p>
+                        </td>
+                        <td>
+                            <p> \( f(x) = x^2 + 2x \)</p> 
+                            <p> \( s.a: -3 <= x <= 6 \)</p>
+                        </td>
+                        <td>
+                            <p>  \( f(x) = e^x - x^3 + 1\) </p> 
+                            <p> \( s.a: -1 <= x <= 6 \) </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p class="mt-3"> Principalmente nos métodos com derivada (Bisseção e Newton)
+                use função de x, nos outros métodos que não usa derivadas é possível usar 
+                outras variáveis, porém o resultado irá motrar as restrições como x .
+             </p>
 
             <div class="row space">
                 <div class="col">
@@ -294,7 +361,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-                                        <span id="funcaoObjetivoUni"> Aguardando... </span>
+                                        <span id="funcaoObjetivoUni">  Aguardando... </span> 
                                         <p id="restricaoUni"></p>
                                     </div>
                                     <div class="col">
@@ -354,7 +421,6 @@
                     </div>
                 </div>      
             </div>
-            
         </div>
         <div id="divDico">
             <h1 class="display-4 text-center"> Busca Dicotômica </h1>
@@ -685,8 +751,7 @@
                                 <div class="col">
                                     <div class="row">
                                         <div class="col">Criterios de parada: </div>
-                                        <div class="col"> C1: |f'(x<sub>k</sub>)| < &epsilon; </div>
-                                        <div class="col"> C2: <sup> |x<sub>k+1</sub> - x<sub>k</sub>| </sup> / <sub> max{|x<sub>k+1</sub>|, 1} </sub> < &epsilon; </div>
+                                        <div class="col"> <p> C1: |f'(x<sub>k</sub>)| < &epsilon; </p>  <p> C2: <sup> |x<sub>k+1</sub> - x<sub>k</sub>| </sup> / <sub> max{|x<sub>k+1</sub>|, 1} </sub> < &epsilon; </p> </div>
                                     </div>
                                 </div>
                             </div>

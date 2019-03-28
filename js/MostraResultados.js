@@ -2,9 +2,11 @@
 
  function MostraResultadoUniforme(resultado, funcao, minimo, maximo, delta) {
 
+    var foiRefinado = false;
+
     //Mostrando os dados nos cards 
     $('#funcaoObjetivoUni').empty(); 
-    $('#funcaoObjetivoUni').append('<strong>' + funcao + '</strong>');
+    $('#funcaoObjetivoUni').append('<strong> ' + funcao + ' </strong>');
     $('#restricaoUni').empty(); 
     $('#restricaoUni').append('s.a: ' + minimo + '<= x <= ' + maximo);
     $('#deltaUni').empty(); 
@@ -18,15 +20,16 @@
 
     //Tabela de resultados 
     $('#uniformeTbody').empty();
+    $('#simple-information').empty();
 
     resultado.iteracoes.forEach(function(item, index) {
         var classe;
         if(refinaUni[index] == true){
             classe = 'bg-warning';
+            foiRefinado = true;            
         } else {
             classe = '';
         }    
-
         $('#uniformeTbody').append('<tr>');
         $('#uniformeTbody').append('<td class="'+classe+'"> ' + index + ' </td>');
         $('#uniformeTbody').append('<td class="'+classe+'"> ' + item.x.toFixed(4) + ' </td>');
@@ -37,16 +40,16 @@
         $('#uniformeTbody').append('</tr>');
     });     
 
-    // Adicionando uma informação 
-    $('#simple-information').empty();
-    $('#simple-information').append('A linha destacada, é a iteração, que a partir dela, terá a busca refinada')
+    if(foiRefinado == true){
+         // Adicionando uma informação 
+        $('#simple-information').append('A linha destacada, é a iteração, que a partir dela, terá a busca refinada');
+    }   
 
     // Resultado final 
     $('#uniResultado').empty(); 
     $('#uniResultado').append('x<sup>*</sup> = ' + resultado.resultado.toFixed(4));
     $('#uniIteracoes').empty(); 
     $('#uniIteracoes').append('Q. Iterações: ' + resultado.iteracoes.length.toFixed(0));         
-
 }   
 
 function MostraResultadoDicotomica(resultado, funcao, minimo, maximo, delta, precisao) {
