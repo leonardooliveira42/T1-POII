@@ -20,21 +20,32 @@
     $('#uniformeTbody').empty();
 
     resultado.iteracoes.forEach(function(item, index) {
-        $('#uniformeTbody').append("<tr class='table-warning'>");
-        $('#uniformeTbody').append('<td> ' + index + ' </td>');
-        $('#uniformeTbody').append('<td> ' + item.x.toFixed(4) + ' </td>');
-        $('#uniformeTbody').append('<td> ' + item.fx.toFixed(4) + ' </td>');
-        $('#uniformeTbody').append('<td> ' + item.xk.toFixed(4) + ' </td>');
-        $('#uniformeTbody').append('<td> ' + item.fxk.toFixed(4) + ' </td>');     
-        $('#uniformeTbody').append('<td> ' + ((item.fx < item.fxk) ? 'Verdade' : 'Falso') + ' </td>');
+        var classe;
+        if(refinaUni[index] == true){
+            classe = 'bg-warning';
+        } else {
+            classe = '';
+        }    
+
+        $('#uniformeTbody').append('<tr>');
+        $('#uniformeTbody').append('<td class="'+classe+'"> ' + index + ' </td>');
+        $('#uniformeTbody').append('<td class="'+classe+'"> ' + item.x.toFixed(4) + ' </td>');
+        $('#uniformeTbody').append('<td class="'+classe+'"> ' + item.fx.toFixed(4) + ' </td>');
+        $('#uniformeTbody').append('<td class="'+classe+'"> ' + item.xk.toFixed(4) + ' </td>');
+        $('#uniformeTbody').append('<td class="'+classe+'"> ' + item.fxk.toFixed(4) + ' </td>');     
+        $('#uniformeTbody').append('<td class="'+classe+'"> ' + ((item.fx < item.fxk) ? 'Verdade' : 'Falso') + ' </td>');
         $('#uniformeTbody').append('</tr>');
     });     
+
+    // Adicionando uma informação 
+    $('#simple-information').empty();
+    $('#simple-information').append('A linha destacada, é a iteração, que a partir dela, terá a busca refinada')
 
     // Resultado final 
     $('#uniResultado').empty(); 
     $('#uniResultado').append('x<sup>*</sup> = ' + resultado.resultado.toFixed(4));
     $('#uniIteracoes').empty(); 
-    $('#uniIteracoes').append('Q. Iterações: ' + resultado.iteracoes.length.toFixed(3));         
+    $('#uniIteracoes').append('Q. Iterações: ' + resultado.iteracoes.length.toFixed(0));         
 
 }   
 

@@ -53,6 +53,7 @@
                                 <label for="delta1"> Digite o delta: </label>
                                 <input type="text" class="form-control" id="delta1" required>
                             </div>
+                            <div class="alert alert-danger" id="alertFormUniforme"> Entrada de dados inválida! </div>
                             <button class="btn btn-success btn-block" type="submit"> Iniciar método </button>
                         </form>
                     </div>
@@ -227,7 +228,7 @@
 
             <p> Este é um trabalho desenvolvido na matéria de Pesquisa Operacional II do 5º termo 
                 do curso de Bacharel em Ciência da Computação (BCC) da UNESP "Julio de Mesquita Filho" 
-                do campus de BAURU, ministrada pela professora Dra. Marcia A. Zanoli Meira e Silva.
+                do campus de Bauru, ministrada pela professora Dra. Marcia A. Zanoli Meira e Silva.
             </p>
 
             <p> Neste trabalho foram implementados alguns métodos de Programação Não Linear utilizando Monovariaveis. </p>
@@ -264,7 +265,7 @@
                         <img src="./imgs/pedro.PNG" class="card-img-top">
                         <div class="card-body">
                             <p> Pedro Barros </p>
-                            <p class="text-muted"> RA:  </p>
+                            <p class="text-muted"> RA: 171022548 </p>
                         </div>
                     </div>
                 </div>
@@ -273,7 +274,7 @@
                         <img src="./imgs/tania.PNG" class="card-img-top">
                         <div class="card-body">
                             <p> Tania Sanai </p>
-                            <p class="text-muted"> RA: </p>
+                            <p class="text-muted"> RA: 171025717 </p>
                         </div>
                     </div>
                 </div>
@@ -309,7 +310,7 @@
                 <!-- Tabela de iterações -->
                 <h5 class="text-center mt-4"> Tabela de iterações </h5>
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-sm">
                         <thead class="thead-dark">
                             <th> k </th>
                             <th> x </th>
@@ -334,6 +335,8 @@
                         </tfoot>
                     </table>
                 </div>
+
+                <p class="alert alert-info" id="simple-information"></p>
 
                 <div class="card text-white bg-success mt-4">
                     <div class="card-header">

@@ -11,30 +11,43 @@
         var maximo = document.getElementById('final1').value; 
         var delta = document.getElementById('delta1').value;
 
-        // Armazenando a função digitada no parser 
-        var funcao = parser.eval(flida); 
+        // Verificar se haverá erros na execução do código 
+        try{
+            // Armazenando a função digitada no parser 
+            var funcao = parser.eval(flida); 
 
-        // Tratando as strings dos numeros 
-        minimo = minimo.replace(',','.'); 
-        minimo = parseFloat(minimo); 
+            // Tratando as strings dos numeros, trocando virgula por ponto
+            minimo = minimo.replace(',','.'); 
+            minimo = parseFloat(minimo); 
 
-        maximo = maximo.replace(',','.'); 
-        maximo = parseFloat(maximo);
+            maximo = maximo.replace(',','.'); 
+            maximo = parseFloat(maximo);
 
-        delta = delta.replace(',','.'); 
-        delta = parseFloat(delta);
+            delta = delta.replace(',','.'); 
+            delta = parseFloat(delta);
 
-        // Iniciando o método 
-        var result = await BuscaUniforme(minimo, maximo, delta)
-        .then(resultado => {
-            console.log("finalmente: ",resultado);
-            MostraResultadoUniforme(resultado, flida, minimo, maximo, delta);
-            console.log(refinaUni);
-        });       
-        
+            // Inverte valor de maximo e minimo se max for menor que minimo
+            var obj = {min: minimo, max: maximo};
+            TrocaIntervalo(obj);       
+            minimo = obj.min; maximo = obj.max;
 
-        
-        // Mostra o resultado na tela 
+            // Se os dados não forem válidos, não executa o algoritmo
+            if(isNaN(minimo) || isNaN(maximo) || isNaN(delta)){
+                throw  'não é um numero';
+            }
+
+            // Desligando o alerta 
+            document.getElementById('alertFormUniforme').style.display = 'none';
+
+            // Iniciando o método 
+            var result = await BuscaUniforme(minimo, maximo, delta)
+            .then(resultado => {
+                MostraResultadoUniforme(resultado, flida, minimo, maximo, delta);
+            });     
+        }catch (e) {
+            console.log(e);
+            document.getElementById('alertFormUniforme').style.display = 'block';
+        }   
     });
 
     function BuscaUniforme(minimo, maximo, delta) {
@@ -510,6 +523,14 @@
         document.getElementById("divNewton").style.display = "none";
 
         document.getElementById(stringID).style.display = "block";
+    }
+    
+    function TrocaIntervalo(obj) {
+        if(obj.max < obj. min){
+            var aux = obj.max; 
+            obj.max = obj.min; 
+            obj.min = aux;
+        }
     }
 
     function Media(v1, v2) {
