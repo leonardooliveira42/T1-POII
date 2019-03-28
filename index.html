@@ -12,12 +12,20 @@
 </head>
 <body>
     <header>
-        <h1> <i class="fas fa-chart-line"></i> Pesquisa Operacional II </h1>
+        <div class="row">
+            <div class="col">
+                <h1 > <i class="fas fa-home" onclick="SwitchDiv(0)"></i> Pesquisa Operacional II  </h1>
+            </div>
+            <div class="col">
+                <button class="btn btn-danger" id="exampleButton"> Exemplos <i class="fas fa-pencil-alt"></i> </button>
+            </div>
+        </div>
     </header>
     <aside class="sidebar">
-    <h5> Selecione um método </h5>
     <nav>
         <div class="container">
+            <hr>
+            <h6> Sem uso de derivada </h6> <hr>
             <div class="accordion" id="accordionDiv">
                 <!-- ##### Botão da busca uniforme ##### -->
                 <button class="btn btn-primary btn-block" onclick="SwitchDiv(1)" data-toggle="collapse" data-target="#metodo1" aria-expanded="false" aria-controls="metodo1">  
@@ -27,24 +35,25 @@
                         <form id="uniforme">
                             <div class="form-group">
                                 <label for="funcao1"> Digite a função: </label>
-                                <input type="text" class="form-control" id="funcao1" value="f(x) = x^2 -3x +2" required>
+                                <input type="text" class="form-control" id="funcao1" required>
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col">
                                         <label for="inicio1"> Inicio </label>
-                                        <input type="float" class="form-control" id="inicio1" value="-1" required>
+                                        <input type="text" class="form-control" id="inicio1" required>
                                     </div>
                                     <div class="col">
                                         <label for="final1"> Final </label>
-                                        <input type="float" class="form-control" id="final1" value="3" required>
+                                        <input type="text" class="form-control" id="final1" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="delta1"> Digite o delta: </label>
-                                <input type="float" class="form-control" id="delta1" value="0,5" required>
+                                <input type="text" class="form-control" id="delta1" required>
                             </div>
+                            <div class="alert alert-danger" id="alertFormUniforme"> Entrada de dados inválida! </div>
                             <button class="btn btn-success btn-block" type="submit"> Iniciar método </button>
                         </form>
                     </div>
@@ -57,17 +66,17 @@
                         <form id="dicotomica" class="form">
                             <div class="form-group">
                                 <label for="funcao2"> Digite a função: </label>
-                                <input type="text" class="form-control" id="funcao2" value="f(x) = x^2 -3x + 2">
+                                <input type="text" class="form-control" id="funcao2" >
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col">
                                         <label for="inicio2"> Inicio </label>
-                                        <input type="float" class="form-control" id="inicio2" value="-1">
+                                        <input type="text" class="form-control" id="inicio2">
                                     </div>
                                     <div class="col">
                                         <label for="final2"> Final </label>
-                                        <input type="float" class="form-control" id="final2" value="3">
+                                        <input type="text" class="form-control" id="final2">
                                     </div>
                                 </div>
                             </div>
@@ -75,11 +84,11 @@
                                 <div class="row">
                                     <div class="col">
                                         <label for="delta2"> Digite o delta: </label>
-                                        <input type="float" class="form-control" id="delta2" value="0.01">
+                                        <input type="text" class="form-control" id="delta2">
                                     </div>
                                     <div class="col">
                                         <label for="precisao2"> Digite a precisao </label>
-                                        <input type="float" class="form-control" id="precisao2" value="0.1">
+                                        <input type="text" class="form-control" id="precisao2">
                                     </div>
                                 </div>
                             </div>
@@ -95,23 +104,23 @@
                         <form class="form" id="formAurea">
                             <div class="form-group">
                                 <label for="funcao3"> Digite a função: </label>
-                                <input type="text" class="form-control" id="funcao3" value="f(x) = x^2 -3x + 2">
+                                <input type="text" class="form-control" id="funcao3">
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col">
                                         <label for="inicio3"> Inicio </label>
-                                        <input type="float" class="form-control" id="inicio3" value="-1">
+                                        <input type="text" class="form-control" id="inicio3">
                                     </div>
                                     <div class="col">
                                         <label for="final3"> Final </label>
-                                        <input type="float" class="form-control" id="final3" value="3">
+                                        <input type="text" class="form-control" id="final3">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="precisao3"> Digite a precisao </label>
-                                <input type="float" class="form-control" id="precisao3" value="0.1">
+                                <input type="text" class="form-control" id="precisao3">
                             </div>
                             <button class="btn btn-success btn-block" type="submit"> Iniciar método </button>
                         </form>
@@ -122,7 +131,7 @@
                     Busca de Fibonacci </button>
                 <div id="metodo4" class="collapse" data-parent="#accordionDiv">
                     <div class="leitura">
-                        <div class="form">
+                        <form id="formFibonacci" class="form">
                             <div class="form-group">
                                 <label for="funcao4"> Digite a função: </label>
                                 <input type="text" class="form-control" id="funcao4">
@@ -131,38 +140,148 @@
                                 <div class="row">
                                     <div class="col">
                                         <label for="inicio4"> Inicio </label>
-                                        <input type="number" class="form-control" id="inicio4">
+                                        <input type="text" class="form-control" id="inicio4">
                                     </div>
                                     <div class="col">
                                         <label for="final4"> Final </label>
-                                        <input type="number" class="form-control" id="final4">
+                                        <input type="text" class="form-control" id="final4">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="precisao4"> Digite o intervalo de incerteza (L) </label>
-                                <input type="number" class="form-control" id="precisao4">
+                                <input type="text" class="form-control" id="precisao4">
                             </div>
                             <button class="btn btn-success btn-block"> Iniciar método </button>
-                        </div>
+                        </form>
                     </div>
                 </div> <!-- Fim da busca fibonacci -->
             </div> <!-- Fim da div accordion -->
+            <hr>
+            <h6> Com uso de derivada </h6>
+            <hr>
+            <div class="accordion" id="derivadaAccordion">
+                <button class="btn btn-warning btn-block" onclick="SwitchDiv(5)" data-toggle="collapse" data-target="#metodo5"> Método da Bisseção </button>
+                <div id="metodo5" class="collapse" data-parent="derivadaAccordion">
+                    <div class="leitura">
+                        <form id="formBissecao" class="form">
+                            <div class="form-group">
+                                <label for="funcao5"> Digite a função: </label>
+                                <input type="text" class="form-control" id="funcao5">
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="inicio5"> Inicio </label>
+                                        <input type="float" class="form-control" id="inicio5">
+                                    </div>
+                                    <div class="col">
+                                        <label for="final5"> Final </label>
+                                        <input type="float" class="form-control" id="final5">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="precisao5"> Digite a precisão </label>
+                                <input type="float" class="form-control" id="precisao5">
+                            </div>
+                            <button class="btn btn-success btn-block"> Iniciar método </button>
+                        </form>
+                    </div>
+                </div>
+                <button class="btn btn-warning btn-block" onclick="SwitchDiv(6)" data-toggle="collapse" data-target="#metodo6"> Método de Newton </button>
+                <div id="metodo6" class="collapse" data-parent="derivadaAccordion">
+                    <div class="leitura">
+                        <form id="formNewton" class="form">
+                            <div class="form-group">
+                                <label for="funcao6"> Digite a função: </label>
+                                <input type="text" class="form-control" id="funcao6">
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="inicio6"> Inicio </label>
+                                        <input type="float" class="form-control" id="inicio6">
+                                    </div>
+                                    <div class="col">
+                                        <label for="final6"> Final </label>
+                                        <input type="float" class="form-control" id="final6">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="precisao6"> Digite a precisão </label>
+                                <input type="float" class="form-control" id="precisao6">
+                            </div>
+                            <button class="btn btn-success btn-block" type="submit"> Iniciar método </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div> <!-- Fim do container -->
     </nav>
     </aside>
     
     <section class="main">
         <div id="tutorial">
-            <h2>Chapter 2</h2>
-            <p>Ennui Williamsburg Echo Park pork belly, hella flannel single-origin coffee. Bicycle rights artisan beard Neutra cardigan Echo Park. Shoreditch flannel tote bag pug jean shorts post-ironic semiotics cornhole forage. Skateboard aesthetic synth leggings Banksy. Shabby chic PBR plaid helvetica dreamcatcher tousled, irony ethnic Tonx sustainable before they sold out McSweeney's. Hoodie Banksy freegan bicycle rights, aesthetic try-hard fap ethnic deep v fixie. Before they sold out +1 ugh, Bushwick Wes Anderson cred Marfa synth butcher jean shorts Terry Richardson.</p>
+            <h2 class="display-4"> Pesquisa Operacional II </h2>
+
+            <p> Este é um trabalho desenvolvido na matéria de Pesquisa Operacional II do 5º termo 
+                do curso de Bacharel em Ciência da Computação (BCC) da UNESP "Julio de Mesquita Filho" 
+                do campus de Bauru, ministrada pela professora Dra. Marcia A. Zanoli Meira e Silva.
+            </p>
+
+            <p> Neste trabalho foram implementados alguns métodos de Programação Não Linear utilizando Monovariaveis. </p>
+            
+            <h5 class="text-center"> Metodos Implementados </h5>
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-dark text-center"> Sem o uso de derivadas  </li>
+                <li class="list-group-item"> Busca Uniforme </li>
+                <li class="list-group-item"> Busca Dicotômica </li>
+                <li class="list-group-item"> Método da Seção Áurea </li>
+                <li class="list-group-item"> Busca de Fibonacci </li>
+                <li class="list-group-item list-group-item-dark text-center"> Com o uso de derivadas  </li>
+                <li class="list-group-item"> Método da Bisseção </li>
+                <li class="list-group-item"> Método de Newton </li>
+            </ul>
+
+            <div class="row space">
+                <div class="col">
+                    <h5 class="text-center"> Trabalho feito por: </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <img src="./imgs/leo.jpg" class="card-img-top foto">
+                        <div class="card-body">
+                            <p> Leonardo Oliveira </p>
+                            <p class="text-muted"> RA: 171025903 </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="./imgs/pedro.PNG" class="card-img-top">
+                        <div class="card-body">
+                            <p> Pedro Barros </p>
+                            <p class="text-muted"> RA: 171022548 </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="./imgs/tania.PNG" class="card-img-top">
+                        <div class="card-body">
+                            <p> Tania Sanai </p>
+                            <p class="text-muted"> RA: 171025717 </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         
-            <p>3 wolf moon blue bottle Truffaut ennui Bushwick, VHS organic skateboard authentic pickled tattooed brunch kogi freegan McSweeney's. Lomo skateboard american apparel, gastropub Schlitz food truck blue bottle. Salvia shoreditch ennui asymmetrical Williamsburg. Cliche umami mumblecore asymmetrical disrupt craft beer, selvage whatever sustainable american apparel YOLO Portland organic. Fashion axe mixtape salvia, Wes Anderson cred food truck DIY. Yr Pinterest Portland Truffaut four loko, semiotics Vice. Authentic lomo bitters, mlkshk raw denim beard narwhal jean shorts cliche tousled PBR.</p>
         
-            <p>Wolf irony Schlitz, ethical gastropub disrupt cray. Skateboard High Life viral, try-hard pitchfork pour-over fap next level. High Life butcher meh, Vice single-origin coffee Marfa intelligentsia farm-to-table gentrify occupy cardigan helvetica salvia vegan. Bicycle rights chillwave keytar before they sold out, narwhal Brooklyn mustache. Plaid literally Schlitz Carles, stumptown swag chillwave Echo Park vinyl jean shorts McSweeney's roof party bespoke. Small batch banjo salvia Terry Richardson 3 wolf moon wolf twee hella. Occupy farm-to-table tattooed tousled twee pug.</p>
-        
-            <p>Disrupt umami kogi selvage hoodie. YOLO brunch chambray beard, Schlitz intelligentsia Austin. Fanny pack iPhone semiotics Tonx flexitarian, disrupt tote bag hoodie dreamcatcher Portland ugh. Truffaut plaid cardigan, ethnic mustache actually master cleanse Pinterest deep v brunch. Shoreditch kale chips Odd Future typewriter Echo Park, artisan pug pour-over disrupt american apparel wayfarers. DIY semiotics chillwave cardigan gluten-free freegan. Tumblr keffiyeh art party, jean shorts viral put a bird on it irony hella gluten-free whatever cornhole deep v.</p>
-        </div>
+       </div>
         <div id="divUniforme">
             <div class="container">
                 <h1 class="display-4 text-center"> Busca Uniforme </h1>
@@ -186,30 +305,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-header">
-                                Gráfico
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <div id="graficoUni"></div>
-                                    </div>
-                                    <div class="col">
-                                        <div id="buttonGraficoUni"> Aguardando... </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
                 </div> <!-- fim da row de cards -->
 
                 <!-- Tabela de iterações -->
                 <h5 class="text-center mt-4"> Tabela de iterações </h5>
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-sm">
                         <thead class="thead-dark">
                             <th> k </th>
                             <th> x </th>
@@ -223,8 +324,19 @@
                                 <td colspan="5"> Aguardando... </td>
                             </tr>        
                         </tbody>    
+                        <tfoot class="table-dark">
+                            <th> k </th>
+                            <th> x </th>
+                            <th> F(x) </th>
+                            <th> x<sub>k</sub> </th>
+                            <th> F(x<sub>k</sub>) </th>
+                            <th> F(x) < f(x<sub>k</sub>) ? </th>
+
+                        </tfoot>
                     </table>
                 </div>
+
+                <p class="alert alert-info" id="simple-information"></p>
 
                 <div class="card text-white bg-success mt-4">
                     <div class="card-header">
@@ -245,13 +357,394 @@
             
         </div>
         <div id="divDico">
-            <h1> Dicotomica </h1>
+            <h1 class="display-4 text-center"> Busca Dicotômica </h1>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            Função
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <span id="funcaoObjetivoDico"> Aguardando... </span>
+                                    <p id="restricaoDico"></p>
+                                </div>
+                                <div class="col">
+                                    <span id="deltaDico"></span>
+                                    <p id="precisaoDico"></p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- fim da row de cards -->
+
+            <!-- Tabela de iterações -->
+            <h5 class="text-center mt-4"> Tabela de iterações </h5>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> |b - a| >= &epsilon; </th>
+                        <th> x </th>
+                        <th> z </th>
+                        <th> F(x) </th>
+                        <th> F(z) </th>
+                        <th> F(x) > F(z) ?</th>
+                    </thead>
+                    <tbody id="DicoTbody">     
+                        <tr>
+                            <td colspan="5"> Aguardando... </td>
+                        </tr>        
+                    </tbody>    
+                    <tfoot class="table-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> |b - a| >= &epsilon; </th>
+                        <th> x </th>
+                        <th> z </th>
+                        <th> F(x) </th>
+                        <th> F(z) </th>
+                        <th> F(x) > F(z) ?</th>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- Fim do card resultados -->
+            <div class="card text-white bg-success mt-4">
+                <div class="card-header">
+                    <h5> Resultado </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span id="DicoResultado"> Aguardando... </span>
+                        </div>
+                        <div class="col">
+                            <span id="DicoIteracoes"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>      
         </div>
         <div id="divAurea">
-            <h1> Seção Aurea </h1>
+            <h1 class="display-4 text-center"> Seção Aurea </h1>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            Função
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <span id="funcaoObjetivoAurea"> Aguardando... </span>
+                                    <p id="restricaoAurea"></p>
+                                </div>
+                                <div class="col">
+                                    <span id="deltaAurea"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- fim da row de cards -->
+
+            <!-- Tabela de iterações -->
+            <h5 class="text-center mt-4"> Tabela de iterações </h5>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> |b - a| > &epsilon; ? </th>
+                        <th> &mu; </th>
+                        <th> &lambda; </th>
+                        <th> F(&mu;) </th>
+                        <th> F(&lambda;) </th>
+                        <th> F(&mu;) > F(&lambda;) ?</th>
+                    </thead>
+                    <tbody id="AureaTbody">     
+                        <tr>
+                            <td colspan="5"> Aguardando... </td>
+                        </tr>        
+                    </tbody>    
+                    <tfoot class="table-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> |b - a| > &epsilon; ? </th>
+                        <th> &mu; </th>
+                        <th> &lambda; </th>
+                        <th> F(&mu;) </th>
+                        <th> F(&lambda;) </th>
+                        <th> F(&mu;) > F(&lambda;) ?</th>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- Fim do card resultados -->
+            <div class="card text-white bg-success mt-4">
+                <div class="card-header">
+                    <h5> Resultado </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span id="AureaResultado"> Aguardando... </span>
+                        </div>
+                        <div class="col">
+                            <span id="AureaIteracoes"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>  
         </div>
         <div id="divFibonacci">
-            <h1> Fibonacci </h1>
+            <h1 class="display-4 text-center"> Busca de Fibonacci </h1>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            Função
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <span id="funcaoObjetivoFibo"> Aguardando... </span>
+                                    <p id="restricaoFibo"></p>
+                                </div>
+                                <div class="col">
+                                    <span id="deltaFibo"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- fim da row de cards -->
+
+            <!-- Tabela de iterações -->
+            <h5 class="text-center mt-4"> Tabela de iterações </h5>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> |b - a| > &epsilon; ? </th>
+                        <th> &mu; </th>
+                        <th> &lambda; </th>
+                        <th> F(&mu;) </th>
+                        <th> F(&lambda;) </th>
+                        <th> F(&mu;) > F(&lambda;) ?</th>
+                    </thead>
+                    <tbody id="FiboTbody">     
+                        <tr>
+                            <td colspan="5"> Aguardando... </td>
+                        </tr>        
+                    </tbody>    
+                    <tfoot class="table-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> |b - a| > &epsilon; ? </th>
+                        <th> &mu; </th>
+                        <th> &lambda; </th>
+                        <th> F(&mu;) </th>
+                        <th> F(&lambda;) </th>
+                        <th> F(&mu;) > F(&lambda;) ?</th>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- Fim do card resultados -->
+            <div class="card text-white bg-success mt-4">
+                <div class="card-header">
+                    <h5> Resultado </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span id="FiboResultado"> Aguardando... </span>
+                        </div>
+                        <div class="col">
+                            <span id="FiboIteracoes"></span>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <div id="divBissecao">
+            <h1 class="display-4 text-center"> Método da Bisseção </h1>
+            <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                Função
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <span id="funcaoObjetivoBisse"> Aguardando... </span>
+                                        <p id="restricaoBisse"></p>
+                                    </div>
+                                    <div class="col">
+                                        <span id="deltaBisse"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <hr>
+                                        <div id="derivadaBissecao">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div> <!-- fim da row de cards -->
+
+            <!-- Tabela de iterações -->
+            <h5 class="text-center mt-4"> Tabela de iterações </h5>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> x </th>
+                        <th> f'(x) </th>
+                    </thead>
+                    <tbody id="BisseTbody">     
+                        <tr>
+                            <td colspan="5"> Aguardando... </td>
+                        </tr>        
+                    </tbody>    
+                    <tfoot class="table-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> x </th>
+                        <th> f'(x) </th>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- Fim do card resultados -->
+            <div class="card text-white bg-success mt-4">
+                <div class="card-header">
+                    <h5> Resultado </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span id="BisseResultado"> Aguardando... </span>
+                        </div>
+                        <div class="col">
+                            <span id="BisseIteracoes"></span>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <div id="divNewton">
+            <h1 class="display-4 text-center"> Método de Newton </h1>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col">
+                                    Função
+                                </div>
+                                <div class="col">
+                                    Derivadas
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <span id="funcaoObjetivoNewton"> Aguardando... </span>
+                                    <p id="restricaoNewton"></p>
+                                </div>
+                                <div class="col">
+                                    <strong> <p id="derivada1Newton"></p> </strong>
+                                    <strong> <p id="derivada2Newton"></p> </strong> 
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col">
+                                    <p> Precisão </p>
+                                    <div id="deltaNewton"> </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">Criterios de parada: </div>
+                                        <div class="col"> C1: |f'(x<sub>k</sub>)| < &epsilon; </div>
+                                        <div class="col"> C2: <sup> |x<sub>k+1</sub> - x<sub>k</sub>| </sup> / <sub> max{|x<sub>k+1</sub>|, 1} </sub> < &epsilon; </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- fim da row de cards -->
+            <!-- Tabela de iterações -->
+            <h5 class="text-center mt-4"> Tabela de iterações </h5>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> x<sub>k</sub> </th>
+                        <th> f'(x<sub>k</sub>) </th>
+                        <th> f"(x<sub>k</sub>) </th>
+                        <th> x<sub>k+1</sub> </th>
+                        <th> f'(x<sub>k+1</sub>) </th>
+                        <th> C1 ?  </th>
+                        <th> C2 ? </th>
+                    </thead>
+                    <tbody id="NewtonTbody">     
+                        <tr>
+                            <td colspan="5"> Aguardando... </td>
+                        </tr>        
+                    </tbody>    
+                    <tfoot class="table-dark">
+                        <th> k </th>
+                        <th> a </th>
+                        <th> b </th>
+                        <th> x<sub>k</sub> </th>
+                        <th> f'(x<sub>k</sub>) </th>
+                        <th> f"(x<sub>k</sub>) </th>
+                        <th> x<sub>k+1</sub> </th>
+                        <th> f'(x<sub>k+1</sub>) </th>
+                        <th> C1 ?  </th>
+                        <th> C2 ? </th>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- Fim do card resultados -->
+            <div class="card text-white bg-success mt-4">
+                <div class="card-header">
+                    <h5> Resultado </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span id="NewtonResultado"> Aguardando... </span>
+                        </div>
+                        <div class="col">
+                            <span id="NewtonIteracoes"></span>
+                        </div>
+                    </div>
+                </div>
+            </div> 
         </div>
     </section>
 
@@ -271,8 +764,8 @@
             </div>
         </div>
     </div>
-                
     
+    <script src="./libraries/jquery/jquery.min.js"></script>
     <script src="./libraries/jquery/jquery.min.js"></script>
     <script src="./libraries/popper.min.js"></script>
     <script src="./libraries/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -280,4 +773,5 @@
     
     <script src="./libraries/math.js"></script>
     <script src="./js/script.js"></script>
+    <script src="./js/MostraResultados.js"></script>
 </body>
