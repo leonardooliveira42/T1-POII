@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> PO II - Trabalho </title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/fontawesome-free/css/all.css">
     <link rel="stylesheet" href="./libraries/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/style.css">
     <script src="./libraries/Chart.bundle.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    <script src="https://cdn.plot.ly/plotly-1.35.2.min.js"></script>
 </head>
 <body>
     <header>
@@ -18,7 +19,10 @@
                 <h1 > <i class="fas fa-home" onclick="SwitchDiv(0)"></i> Pesquisa Operacional II  </h1>
             </div>
             <div class="col">
-                <button class="btn btn-danger" id="exampleButton" > Exemplos <i class="fas fa-pencil-alt"></i> </button>
+                <div class="inline">
+                    <button class="btn btn-info" id="chartButton" data-toggle="modal" data-target="#chartModal"> Gráfico </button>
+                    <button class="btn btn-danger" id="exampleButton" > Exemplos <i class="fas fa-pencil-alt"></i> </button>
+                </div>
             </div>
         </div>
     </header>
@@ -813,22 +817,27 @@
         </div>
     </section>
 
-    <!-- Modal do gráfico -->
-    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"> Gráfico </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    <div class="container">
+        <!-- Modal do gráfico -->
+        <div class="modal fade bd-modal-lg bd-modal-xl" tabindex="-1" id="chartModal" role="dialog">
+            <div class="modal-dialog modal-lg modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"> Gráfico </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body graficos">
+                        <div id="avisoGrafico"></div>
+                        <div id="plot"></div>
+
+                    </div>                
                 </div>
-                <div class="modal-body">
-                    <div class="conteudomodal"></div>
-                </div>                
             </div>
         </div>
     </div>
+    
     
     <script src="./libraries/jquery/jquery.min.js"></script>
     <script src="./libraries/jquery/jquery.min.js"></script>

@@ -3,6 +3,11 @@
     var parser = math.parser(); 
     var refinaUni = [];
 
+    // Ultima função e ponto minimo computados 
+    var ultimafuncao = null; 
+    var pontoMinimo = null;
+    var ultimoIntervalo = null;
+
     /** Busca Uniforme  */
     $('#uniforme').submit(async function(e) {
         e.preventDefault();
@@ -49,7 +54,10 @@
             // Iniciando o método 
             var result = await BuscaUniforme(refina, minimo, maximo, delta)
             .then(resultado => {
-                MostraResultadoUniforme(resultado, flida, minimo, maximo, delta);
+                MostraResultadoUniforme(resultado, flida, minimo, maximo, delta, parseInt(refina));
+                ultimafuncao = flida;
+                pontoMinimo = resultado.resultado;
+                ultimoIntervalo = {a: minimo, b: maximo};
             });     
         }catch (e) {
             console.log(e);
@@ -709,6 +717,63 @@
 
 
     });
+
+    document.getElementById('chartButton').addEventListener('click', function(e) {
+        console.log(ultimafuncao, pontoMinimo, ultimoIntervalo);
+        $('#avisoGrafico').empty();
+
+        var fun = ultimafuncao.split('=');
+        console.log(fun);
+
+        if(ultimafuncao == null){
+            $('#avisoGrafico').append('<div class="alert alert-warning"> Nenhuma função foi computada ainda </div>');
+        } else{
+            // Gerando um array com valores de x y
+            Draw(fun[1]);
+            
+        }
+
+    });
+
+    function Draw(funcao) {
+        try{
+
+            const expr = math.compile(funcao); 
+
+            const xValues = math.range(-10, 10, 0.5).toArray(); 
+            const yValues = xValues.map(function(x) {
+                return expr.eval({x: x});
+            });
+
+            const trace0 = {
+                x: [pontoMinimo], 
+                y: [expr.eval({x: pontoMinimo})], 
+                mode: 'markers',
+                marker: {
+                    color: 'rgb(219, 64, 82)',
+                    size: 12
+                }, 
+                name: "Ponto minimo"
+            }
+            console.log(trace0);
+
+            const trace1 = {
+                x: xValues, 
+                y: yValues, 
+                mode: 'lines', 
+                name: ultimafuncao
+            }
+
+            const trace2 = {
+                x: [-1],
+                mode: 'lines'
+            }
+            const data = [trace1, trace0];
+            Plotly.newPlot('plot',data)
+        }catch(e){
+            console.log(e);
+        }
+    }
    
 
     // Popover functions

@@ -63,13 +63,18 @@ button{
     display: none;
 }
 
-#exampleButton{
+#exampleButton, #chartButton{
     float: right;
+    margin: 10px;
 }
 
 .lineWarning{
     background: yellow; 
     color: white;
+}
+
+.graficos{
+ 
 }
 
 .imagemGrafico{

@@ -1,6 +1,6 @@
  /********* Funções para mostrar resultados **********/
 
- function MostraResultadoUniforme(resultado, funcao, minimo, maximo, delta) {
+ function MostraResultadoUniforme(resultado, funcao, minimo, maximo, delta, casas) {
 
     var foiRefinado = false;
 
@@ -32,10 +32,10 @@
         }    
         $('#uniformeTbody').append('<tr>');
         $('#uniformeTbody').append('<td class="'+classe+'"> ' + index + ' </td>');
-        $('#uniformeTbody').append('<td class="'+classe+'"> ' + item.x.toFixed(4) + ' </td>');
-        $('#uniformeTbody').append('<td class="'+classe+'"> ' + item.fx.toFixed(4) + ' </td>');
-        $('#uniformeTbody').append('<td class="'+classe+'"> ' + item.xk.toFixed(4) + ' </td>');
-        $('#uniformeTbody').append('<td class="'+classe+'"> ' + item.fxk.toFixed(4) + ' </td>');     
+        $('#uniformeTbody').append('<td class="'+classe+'"> ' + item.x.toFixed(2 + casas) + ' </td>');
+        $('#uniformeTbody').append('<td class="'+classe+'"> ' + item.fx.toFixed(2 + casas) + ' </td>');
+        $('#uniformeTbody').append('<td class="'+classe+'"> ' + item.xk.toFixed(2 + casas) + ' </td>');
+        $('#uniformeTbody').append('<td class="'+classe+'"> ' + item.fxk.toFixed(2 + casas) + ' </td>');     
         $('#uniformeTbody').append('<td class="'+classe+'"> ' + ((item.fx < item.fxk) ? 'Verdade' : 'Falso') + ' </td>');
         $('#uniformeTbody').append('</tr>');
     });     
@@ -47,7 +47,7 @@
 
     // Resultado final 
     $('#uniResultado').empty(); 
-    $('#uniResultado').append('x<sup>*</sup> = ' + resultado.resultado.toFixed(4));
+    $('#uniResultado').append('x<sup>*</sup> = ' + resultado.resultado.toFixed(2 + casas));
     $('#uniIteracoes').empty(); 
     $('#uniIteracoes').append('Q. Iterações: ' + resultado.iteracoes.length.toFixed(0));         
 }   
