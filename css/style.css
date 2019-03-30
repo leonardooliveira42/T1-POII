@@ -13,6 +13,7 @@ header {
     padding: 5px;
     height: 64px;
     overflow: hidden;
+    background-image: linear-gradient(to right, black, rgb(53, 52, 52));
 }
 
 #exampleButton, #chartButton{
@@ -34,8 +35,8 @@ header {
     width: 30%;
     left: 0;
     border-right: 5px solid gray; 
-    background-color: #517194;
-    color: white;
+    background-image: linear-gradient(rgb(140, 140, 240), #d1ecf1);
+    
 }
 
 .main {
