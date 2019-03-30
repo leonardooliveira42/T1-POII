@@ -159,6 +159,9 @@
             .then((res) => {
                 console.log(res);
                 MostraResultadoDicotomica(res ,flida, minimo, maximo, delta, precisao);
+                ultimafuncao = flida;
+                pontoMinimo = res.resultado;
+                ultimoIntervalo = {a: minimo, b: maximo};
             });
 
         } catch (e){
@@ -256,6 +259,9 @@
             .then((res) => {
                 console.log(res);
                 MostraResultadoAurea(res, flida, minimo, maximo, precisao);
+                ultimafuncao = flida;
+                pontoMinimo = res.resultado;
+                ultimoIntervalo = {a: minimo, b: maximo};
             });
         } catch (e) {
             console.log(e);
@@ -354,6 +360,9 @@
             await BuscaFibonacci(minimo, maximo, precisao).then((res) => {
                 console.log(res);
                 MostraResultadoFibonacci(res, flida, minimo, maximo, precisao);
+                ultimafuncao = flida;
+                pontoMinimo = res.resultado;
+                ultimoIntervalo = {a: minimo, b: maximo};
                 
             });
         } catch (e) {
@@ -478,6 +487,9 @@
             await  Bissecao(derivada, minimo, maximo, precisao).then(function(res) {
                 // Mostra resultados
                 MostraResultadoBissecao(res,flida, derivada, minimo, maximo, precisao);
+                ultimafuncao = flida;
+                pontoMinimo = res.resultado;
+                ultimoIntervalo = {a: minimo, b: maximo};
             });
         }catch (e){
             console.log(e);
@@ -563,6 +575,9 @@
 
                 // Mostra Resultados
                 MostraResultadoNewton(res, flida, derivada, derivadaSegunda, minimo, maximo, precisao);
+                ultimafuncao = flida;
+                pontoMinimo = res.resultado;
+                ultimoIntervalo = {a: minimo, b: maximo};
             });
         } catch (e) {
             console.log(e);
@@ -722,25 +737,24 @@
         console.log(ultimafuncao, pontoMinimo, ultimoIntervalo);
         $('#avisoGrafico').empty();
 
-        var fun = ultimafuncao.split('=');
-        console.log(fun);
-
         if(ultimafuncao == null){
             $('#avisoGrafico').append('<div class="alert alert-warning"> Nenhuma função foi computada ainda </div>');
         } else{
-            // Gerando um array com valores de x y
-            Draw(fun[1]);
+            var fun = ultimafuncao.split('=');
+            $('#avisoGrafico').append('<div class="alert alert-info"> As linhas verticais indicam o intervalo especificado. </div>');
+            // Gerando um array com valores de x y 
+            Draw(fun[1], ultimoIntervalo.a, ultimoIntervalo.b);
             
         }
 
     });
 
-    function Draw(funcao) {
+    function Draw(funcao, min, max) {
         try{
 
             const expr = math.compile(funcao); 
 
-            const xValues = math.range(-10, 10, 0.5).toArray(); 
+            const xValues = math.range((-10+min), (10+max), 0.1).toArray(); 
             const yValues = xValues.map(function(x) {
                 return expr.eval({x: x});
             });
@@ -755,7 +769,6 @@
                 }, 
                 name: "Ponto minimo"
             }
-            console.log(trace0);
 
             const trace1 = {
                 x: xValues, 
@@ -764,12 +777,29 @@
                 name: ultimafuncao
             }
 
-            const trace2 = {
-                x: [-1],
-                mode: 'lines'
-            }
             const data = [trace1, trace0];
-            Plotly.newPlot('plot',data)
+            var layout = {
+                shapes: [
+                    {
+                        label: 'limite',
+                        type: 'line',
+                        y0: 0, 
+                        y1: 1, 
+                        yref: "paper",
+                        x0: min, 
+                        x1: min
+                    }, 
+                    {
+                        type: 'line',
+                        y0: 0, 
+                        y1: 1, 
+                        yref: "paper",
+                        x0: max, 
+                        x1: max
+                    }, 
+                 ]
+            }
+            Plotly.newPlot('plot',data, layout)
         }catch(e){
             console.log(e);
         }

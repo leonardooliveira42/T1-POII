@@ -1,3 +1,5 @@
+
+/* ESTILOS DA PÁGINA */
 html, body {
     height: 100%;
 }
@@ -10,9 +12,12 @@ body {
 header {
     padding: 5px;
     height: 64px;
-    color: #fff;
-    background-color: #000;
     overflow: hidden;
+}
+
+#exampleButton, #chartButton{
+    float: right;
+    margin: 10px;
 }
 
 .sidebar, .main {
@@ -29,7 +34,8 @@ header {
     width: 30%;
     left: 0;
     border-right: 5px solid gray; 
-    background-color: #ffd
+    background-color: #517194;
+    color: white;
 }
 
 .main {
@@ -37,23 +43,34 @@ header {
     left: 30%;
     right: 0;
     padding: 20px;
-}  
-.infoIcon{
-    font-size: 20px;
+} 
+
+/* Estilos do form para iniciar o método */
+.leitura{
+    border: 1px solid lightgray; 
+    border-radius: 10px;
+    border-top: 0px;
+    padding: 10px;
+    background: white;
+    color: black;
+    box-shadow: 3px 4px 9px 0px lightgray;
 }
 
 button{
     margin-top: 10px;
 }
 
-.leitura{
-    border: 1px solid lightgray; 
-    border-top: 0px;
-    padding: 10px;
-    box-shadow: 3px 4px 9px 0px lightgray;
+/* Estilo do ícone para informar sobre o refinamento */
+.infoIcon{
+    font-size: 20px;
 }
 
-/* iniciando a página */
+/* Estilos para os cards de apresentação dos membros do grupo */
+.card{
+    box-shadow: 2px 3px 4px grey;
+}
+
+/* Ocultando as páginas dos outros métodos */
 #divUniforme, #divDico, #divAurea, #divFibonacci, #divBissecao, #divNewton{
     display: none;
 }
@@ -61,41 +78,4 @@ button{
 /* Alertas  */
 #alertFormUniforme, #alertFormDico, #alertFormAurea, #alertFormFibo, #alertFormBisse, #alertFormNewton{
     display: none;
-}
-
-#exampleButton, #chartButton{
-    float: right;
-    margin: 10px;
-}
-
-.lineWarning{
-    background: yellow; 
-    color: white;
-}
-
-.graficos{
- 
-}
-
-.imagemGrafico{
-    max-height: 80px;
-}
-
-.conteudomodal{
-    height: 300px;
-    width: 200px; 
-    background: black;
-}
-
-.space{
-    margin-top: 40px;
-}
-
-
-.foto{
-    margin: 0px;
-}
-
-.card{
-    padding: 0px;
 }

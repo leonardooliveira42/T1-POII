@@ -10,17 +10,17 @@
     <link rel="stylesheet" href="./css/style.css">
     <script src="./libraries/Chart.bundle.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-    <script src="https://cdn.plot.ly/plotly-1.35.2.min.js"></script>
+    <script src="./js/plotly-latest.min.js"></script>
 </head>
 <body>
-    <header>
+    <header class="bg-dark text-white">
         <div class="row">
             <div class="col">
-                <h1 > <i class="fas fa-home" onclick="SwitchDiv(0)"></i> Pesquisa Operacional II  </h1>
+                <h1 class="ml-3" > <i class="fas fa-home" onclick="SwitchDiv(0)"></i> Pesquisa Operacional II  </h1>
             </div>
             <div class="col">
                 <div class="inline">
-                    <button class="btn btn-info" id="chartButton" data-toggle="modal" data-target="#chartModal"> Gráfico </button>
+                    <button class="btn btn-info" id="chartButton" data-toggle="modal" data-target="#chartModal"> Gráfico <i class="fas fa-chart-line"></i> </button>
                     <button class="btn btn-danger" id="exampleButton" > Exemplos <i class="fas fa-pencil-alt"></i> </button>
                 </div>
             </div>
@@ -33,7 +33,7 @@
             <h6> Sem uso de derivada </h6> <hr>
             <div class="accordion" id="accordionDiv">
                 <!-- ##### Botão da busca uniforme ##### -->
-                <button class="btn btn-primary btn-block" onclick="SwitchDiv(1)" data-toggle="collapse" data-target="#metodo1" aria-expanded="false" aria-controls="metodo1">  
+                <button class="btn btn-light btn-block" onclick="SwitchDiv(1)" data-toggle="collapse" data-target="#metodo1" aria-expanded="false" aria-controls="metodo1">  
                         Busca Uniforme </button>
                 <div id="metodo1" class="collapse" data-parent="#accordionDiv">
                     <div class="leitura">
@@ -60,7 +60,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="qtdRefina"> Qtd. de vezes para refinar </label>
-                                <input type="number" min='0' max='3' name="" id="qtdRefina" value = '1'> <i class="far fa-question-circle infoIcon" role="button" data-toggle="popover" title="Busca refinada" data-content="Aqui você pode digitar a quantidade de vezes que o delta será divido por 10 para refinar a busca. Porém o máximo de vezes permitido por esse programa é 3 vezes. "></i>
+                                <input type="number" min='0' max='3' name="" id="qtdRefina" value = '1'> <i class="far fa-question-circle infoIcon popover-dismiss" role="button" data-toggle="popover" title="Busca refinada" data-content="Aqui você pode digitar a quantidade de vezes que o delta será divido por 10 para refinar a busca. Porém o máximo de vezes permitido por esse programa é 3 vezes. "></i>
                             </div>
                             <div class="alert alert-danger" id="alertFormUniforme"> Entrada de dados inválida! </div>
                             <button class="btn btn-success btn-block" type="submit"> Iniciar método </button>
@@ -68,7 +68,7 @@
                     </div>
                 </div> <!-- Fim do método da busca uniforme -->
                 <!-- ##### Botão da busca dicotômica ##### -->
-                <button class="btn btn-secondary btn-block" onclick="SwitchDiv(2)" data-toggle="collapse" data-target="#metodo2" aria-expanded="false" aria-controls="metodo2">  
+                <button class="btn btn-light btn-block" onclick="SwitchDiv(2)" data-toggle="collapse" data-target="#metodo2" aria-expanded="false" aria-controls="metodo2">  
                     Busca Dicotômica </button> 
                 <div id="metodo2" class="collapse" data-parent="#accordionDiv">
                     <div class="leitura">
@@ -107,7 +107,7 @@
                     </div>
                 </div> <!-- Fim da busca dicotômica -->
                 <!-- ##### Botão da Seção Áuria ##### -->
-                <button class="btn btn-info btn-block" onclick="SwitchDiv(3)" data-toggle="collapse" data-target="#metodo3" aria-expanded=" " aria-controls="metodo3">  
+                <button class="btn btn-light btn-block" onclick="SwitchDiv(3)" data-toggle="collapse" data-target="#metodo3" aria-expanded=" " aria-controls="metodo3">  
                     Seção Áurea </button>
                 <div id="metodo3" class="collapse" data-parent="#accordionDiv">
                     <div class="leitura">
@@ -138,7 +138,7 @@
                     </div>
                 </div> <!-- Fim da seção áuria -->
                 <!-- ##### Busca de Fibonacci -->
-                <button class="btn btn-dark btn-block" onclick="SwitchDiv(4)" data-toggle="collapse" data-target="#metodo4" aria-expanded=" " aria-controls="metodo4">  
+                <button class="btn btn-light btn-block" onclick="SwitchDiv(4)" data-toggle="collapse" data-target="#metodo4" aria-expanded=" " aria-controls="metodo4">  
                     Busca de Fibonacci </button>
                 <div id="metodo4" class="collapse" data-parent="#accordionDiv">
                     <div class="leitura">
@@ -173,7 +173,7 @@
             <h6> Com uso de derivada </h6>
             <hr>
             <div class="accordion" id="derivadaAccordion">
-                <button class="btn btn-warning btn-block collapsed" onclick="SwitchDiv(5)" data-toggle="collapse" data-target="#metodo5"> Método da Bisseção </button>
+                <button class="btn btn-light btn-block collapsed" onclick="SwitchDiv(5)" data-toggle="collapse" data-target="#metodo5"> Método da Bisseção </button>
                 <div id="metodo5" class="collapse" data-parent="#derivadaAccordion">
                     <div class="leitura">
                         <form id="formBissecao" class="form">
@@ -202,7 +202,7 @@
                         </form>
                     </div>
                 </div>
-                <button class="btn btn-warning btn-block" onclick="SwitchDiv(6)" data-toggle="collapse" data-target="#metodo6"> Método de Newton </button>
+                <button class="btn btn-light btn-block" onclick="SwitchDiv(6)" data-toggle="collapse" data-target="#metodo6"> Método de Newton </button>
                 <div id="metodo6" class="collapse" data-parent="#derivadaAccordion">
                     <div class="leitura">
                         <form id="formNewton" class="form">
@@ -316,7 +316,7 @@
                 outras variáveis, porém o resultado irá motrar as restrições como x .
              </p>
 
-            <div class="row space">
+            <div class="row mt-5">
                 <div class="col">
                     <h5 class="text-center"> Trabalho feito por: </h5>
                 </div>
@@ -831,13 +831,11 @@
                     <div class="modal-body graficos">
                         <div id="avisoGrafico"></div>
                         <div id="plot"></div>
-
                     </div>                
                 </div>
             </div>
         </div>
     </div>
-    
     
     <script src="./libraries/jquery/jquery.min.js"></script>
     <script src="./libraries/jquery/jquery.min.js"></script>
