@@ -11,6 +11,9 @@
     /** Busca Uniforme  */
     $('#uniforme').submit(async function(e) {
         e.preventDefault();
+
+        SwitchDiv(1);
+
         var flida = document.getElementById('funcao1').value; 
         var minimo = document.getElementById('inicio1').value; 
         var maximo = document.getElementById('final1').value; 
@@ -19,6 +22,7 @@
 
         // Verificar se haverá erros na execução do código 
         try{
+            flida = flida.replace('F','f');
             // Armazenando a função digitada no parser 
             var funcao = parser.eval(flida); 
 
@@ -78,48 +82,12 @@
         });
     }
 
-    function CalculoBuscaUniforme(iteracao, a, b, del, refina, array) {
-
-        var fX = parser.eval('f(' + a + ')');
-        var xk = a + del; 
-        var fXk = parser.eval('f(' + xk + ')');
-
-        if(xk <= b){
-            // Continua o código
-            if(fXk < fX) {                
-                // Continua o processo 
-                // Salva a iteração no array 
-                array.push({
-                    x: a, 
-                    fx: fX,
-                    xk: xk,
-                    fxk: fXk
-                });
-                return CalculoBuscaUniforme(iteracao+1, xk, b, del, refina, array);
-            } else {
-                if(refina == 0){
-                    // Retorna o resultado e para 
-                    array.push({
-                        x: a, 
-                        fx: fX,
-                        xk: xk,
-                        fxk: fXk
-                    });
-                    return a;
-                } else {
-                    refinaUni[iteracao] = true;
-                    return CalculoBuscaUniforme(iteracao+1,a-del, b, del/10, --refina, array);
-                }
-            }
-        } else {
-            return a;
-        }
-    }
-
     /** Busca Dicotomica  */
 
     $('#dicotomica').submit(async function(e) {
         e.preventDefault();
+
+        SwitchDiv(2);
         
         var flida = document.getElementById('funcao2').value; 
         var minimo = document.getElementById('inicio2').value; 
@@ -128,6 +96,7 @@
         var precisao = document.getElementById('precisao2').value; 
 
         try{
+            flida = flida.replace('F','f');
             var funcao = parser.eval(flida);
 
             minimo = minimo.replace(',','.'); 
@@ -182,46 +151,12 @@
         });
     }
 
-    function CalculoBuscaDicotomica(k, a, b, delta, precisao, iteracao) {
-        // Primeiro criterio de convergencia 
-        if(IntervaloMaiorQPrecisao(a,b,precisao)){
-            //Se for verdade continua o processo 
-            var meio = Media(a,b); 
-            var x = meio - delta; 
-            var z = meio + delta; 
-
-            var fx = parser.eval('f(' + x + ')');
-            var fz = parser.eval('f(' + z + ')');
-
-            iteracao.push({
-                a: a, 
-                b: b, 
-                x: x, 
-                z: z, 
-                fx: fx, 
-                fz: fz
-            });
-
-            if(fx > fz) {
-                // Se for verdade o a recebe x
-                return CalculoBuscaDicotomica(k++,x,b,delta,precisao,iteracao);
-            } else {
-                // Se for falso o b recebe z
-                return CalculoBuscaDicotomica(k++,a,z,delta,precisao,iteracao);
-            }
-        } else{
-            iteracao.push({
-                a: a, 
-                b: b
-            });
-            return Media(a,b);
-        }
-    }
-
     /** Seção Aurea */
     
     $('#formAurea').submit(async function(e) {
         e.preventDefault();
+
+        SwitchDiv(3);
         
         var flida = document.getElementById('funcao3').value; 
         var minimo = document.getElementById('inicio3').value; 
@@ -229,6 +164,7 @@
         var precisao = document.getElementById('precisao3').value; 
 
        try{
+            flida = flida.replace('F','f');
             var funcao = parser.eval(flida);
 
             minimo = minimo.replace(',','.'); 
@@ -287,44 +223,11 @@
         });
     }
 
-    function CalculoSecaoAurea(k, a, b, e, alfa, iteracao){
-
-        if(IntervaloMaiorQPrecisao(a,b,e)){
-            //Se for verdade continua o processo  
-            var u = a + (1 - alfa) * (b - a);
-            var l = a + alfa * (b - a); 
-
-            var fu = parser.eval('f(' + u + ')');
-            var fl = parser.eval('f(' + l + ')');
-
-            iteracao.push({
-                a: a, 
-                b: b, 
-                u: u, 
-                l: l, 
-                fu: fu, 
-                fl: fl
-            });
-
-            if(fu > fl) {
-                // Se for verdade o a recebe x
-                return CalculoSecaoAurea(k++, u, b, e, alfa, iteracao);
-            } else {
-                // Se for falso o b recebe z
-                return CalculoSecaoAurea(k++, a, l, e, alfa, iteracao);
-            }
-        } else{
-            iteracao.push({
-                a: a, 
-                b: b
-            });
-            return Media(a,b);
-        }
-    }
-
     /** Busca de Fibonacci */
     $('#formFibonacci').submit(async function(e) {
         e.preventDefault();
+        
+        SwitchDiv(4);
 
         var flida = document.getElementById('funcao4').value; 
         var minimo = document.getElementById('inicio4').value; 
@@ -339,6 +242,7 @@
             precisao = precisao.replace(',','.'); 
             precisao = parseFloat(precisao);
 
+            flida = flida.replace('F','f');
             var funcao = parser.eval(flida);
 
             var obj = {min: minimo, max: maximo};
@@ -400,43 +304,6 @@
         });
     }
 
-    function CalculoBuscaFibonacci(k, a, b, max, sequenciaFibo, e, iteracao) {
-        // Se atingiu o numero de iterações maximas
-        if(k <= max) {
-
-            var auxU = (sequenciaFibo.length-1)-k-2;
-            var auxL = (sequenciaFibo.length-1)-k-1;
-            var divisor = (sequenciaFibo.length-1)-k;
-            var u = a + (sequenciaFibo[auxU] * (b - a)) / (sequenciaFibo[divisor]);
-            var l = a + (sequenciaFibo[auxL] * (b - a)) / (sequenciaFibo[divisor]);
-
-            var fu = parser.eval('f(' + u + ')'); 
-            var fl = parser.eval('f(' + l + ')');
-
-            var object = {
-                a: a, 
-                b: b,
-                u: u, 
-                l: l, 
-                fu: fu, 
-                fl: fl
-            };
-            iteracao.push(object);
-            if(IntervaloMaiorQPrecisao(a,b,e)) {
-
-                if(fu > fl){
-                    return CalculoBuscaFibonacci(k++, u, b, max, sequenciaFibo, e, iteracao);
-                } else {
-                    return CalculoBuscaFibonacci(k++, a, l, max, sequenciaFibo, e, iteracao);
-                }
-            } else {
-                return Media(a,b);
-            }
-        } else {
-            return Media(a,b);
-        }
-    }
-
     function Fibonacci(a) {
         if(a == 1) {
             return 1;
@@ -450,6 +317,8 @@
     /** Uso de derivada - bisseção */
     $('#formBissecao').submit(async function(e) {
         e.preventDefault(); 
+
+        SwitchDiv(5);
         
         var flida = document.getElementById('funcao5').value; 
         var minimo = document.getElementById('inicio5').value; 
@@ -478,6 +347,7 @@
                 throw 'precisao inválido';
             }
             
+            flida = flida.replace('F','f');
             var funcao = parser.eval(flida);
             var derivada = math.derivative(flida, 'x'); 
 
@@ -512,29 +382,12 @@
         });
     }
 
-    function CalculoBissecao(k, max, a, b, der, e, iteracao) {
-        var x = Media(a,b); 
-        var resDerivada = der.eval({x: x});
-        if(k < max) {           
-            // Salvando a iteração
-            iteracao.push({
-                a: a, 
-                b: b, 
-                x: x, 
-                flx: resDerivada
-            });
-            if (resDerivada > 0) {
-                return CalculoBissecao(++k, max, a, x, der, e, iteracao);
-            } else if (resDerivada < 0) {
-                return CalculoBissecao(++k, max, x, b, der, e, iteracao);
-            } else return x;
-        } else return x;
-    }
-
     /*** Método do Newton */
 
     $('#formNewton').submit(async function(e) {
         e.preventDefault();
+
+        SwitchDiv(6);
 
         var flida = document.getElementById('funcao6').value; 
         var minimo = document.getElementById('inicio6').value; 
@@ -563,6 +416,7 @@
                 throw 'precisao inválido';
             }
             
+            flida = flida.replace('F','f');
             var funcao = parser.eval(flida);
             var derivada = math.derivative(flida, 'x');
             var derivadaSegunda = math.derivative(derivada, 'x');
@@ -596,41 +450,6 @@
             };
             resolve(object);
         });
-    }   
-
-    function CalculoNewton(k, a, b, der1, der2, e, iteracao) {
-
-        var x0 = a; 
-        var d1x0 = der1.eval({x: x0});
-        var d2x0 = der2.eval({x: x0});
-        
-        var x1 = x0 - (d1x0 / d2x0);
-        var d1x1 = der1.eval({x: x1});
-
-        iteracao.push({
-            a: a, 
-            b: b, 
-            x0: x0, 
-            x1: x1,
-            d1x0: d1x0, 
-            d2x0: d2x0, 
-            d1x1: d1x1
-        });
-
-        // Primeiro critério de parada 
-        if(Math.abs(d1x1) > e) {
-            //continua
-            // Segundo critério de parada 
-            if(CriterioParadaNewton(x0,x1,e)){
-                // Continua 
-                return CalculoNewton(k++, x1, b, der1, der2, e, iteracao);
-            }else return x1; 
-        } else return x1;
-    }
-
-    function CriterioParadaNewton(x0, x1, e) {
-       var c = (Math.abs(x1 - x0) / ((Math.abs(x1) < 1) ? 1 : Math.abs(x1)));
-       return c > e;
     }
 
     /** Funções de uso geral  */
