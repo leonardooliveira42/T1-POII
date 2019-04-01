@@ -5,19 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> PO II - Trabalho </title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/fontawesome-free/css/all.css">
     <link rel="stylesheet" href="./libraries/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/style.css">
     <script src="./libraries/Chart.bundle.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    <script src="./js/plotly-latest.min.js"></script>
 </head>
 <body>
-    <header>
+    <header class="text-white">
         <div class="row">
             <div class="col">
-                <h1 > <i class="fas fa-home" onclick="SwitchDiv(0)"></i> Pesquisa Operacional II  </h1>
+                <h1 class="ml-3" > <i class="fas fa-home" onclick="SwitchDiv(0)"></i> Pesquisa Operacional II  </h1>
             </div>
             <div class="col">
-                <button class="btn btn-danger" id="exampleButton"> Exemplos <i class="fas fa-pencil-alt"></i> </button>
+                <div class="inline">
+                    <button class="btn btn-info" id="chartButton" data-toggle="modal" data-target="#chartModal"> Gráfico <i class="fas fa-chart-line"></i> </button>
+                    <button class="btn btn-danger" id="exampleButton" > Exemplos <i class="fas fa-pencil-alt"></i> </button>
+                </div>
             </div>
         </div>
     </header>
@@ -28,7 +33,7 @@
             <h6> Sem uso de derivada </h6> <hr>
             <div class="accordion" id="accordionDiv">
                 <!-- ##### Botão da busca uniforme ##### -->
-                <button class="btn btn-primary btn-block" onclick="SwitchDiv(1)" data-toggle="collapse" data-target="#metodo1" aria-expanded="false" aria-controls="metodo1">  
+                <button class="btn btn-dark btn-block" onclick="SwitchDiv(1)" data-toggle="collapse" data-target="#metodo1" aria-expanded="false" aria-controls="metodo1">  
                         Busca Uniforme </button>
                 <div id="metodo1" class="collapse" data-parent="#accordionDiv">
                     <div class="leitura">
@@ -53,13 +58,17 @@
                                 <label for="delta1"> Digite o delta: </label>
                                 <input type="text" class="form-control" id="delta1" required>
                             </div>
+                            <div class="form-group">
+                                <label for="qtdRefina"> Qtd. de vezes para refinar </label>
+                                <input type="number" min='0' max='3' name="" id="qtdRefina" value = '1'> <i class="far fa-question-circle infoIcon popover-dismiss" role="button" data-toggle="popover" title="Busca refinada" data-content="Aqui você pode digitar a quantidade de vezes que o delta será divido por 10 para refinar a busca. Porém o máximo de vezes permitido por esse programa é 3 vezes. "></i>
+                            </div>
                             <div class="alert alert-danger" id="alertFormUniforme"> Entrada de dados inválida! </div>
                             <button class="btn btn-success btn-block" type="submit"> Iniciar método </button>
                         </form>
                     </div>
                 </div> <!-- Fim do método da busca uniforme -->
                 <!-- ##### Botão da busca dicotômica ##### -->
-                <button class="btn btn-secondary btn-block" onclick="SwitchDiv(2)" data-toggle="collapse" data-target="#metodo2" aria-expanded="false" aria-controls="metodo2">  
+                <button class="btn btn-dark btn-block" onclick="SwitchDiv(2)" data-toggle="collapse" data-target="#metodo2" aria-expanded="false" aria-controls="metodo2">  
                     Busca Dicotômica </button> 
                 <div id="metodo2" class="collapse" data-parent="#accordionDiv">
                     <div class="leitura">
@@ -92,13 +101,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="alert alert-danger" id="alertFormDico"> Entrada de dados inválida! </div>
                             <button class="btn btn-success btn-block" type="submit" > Iniciar método </button>
                         </form>
                     </div>
                 </div> <!-- Fim da busca dicotômica -->
                 <!-- ##### Botão da Seção Áuria ##### -->
-                <button class="btn btn-info btn-block" onclick="SwitchDiv(3)" data-toggle="collapse" data-target="#metodo3" aria-expanded=" " aria-controls="metodo3">  
-                    Seção Áuria </button>
+                <button class="btn btn-dark btn-block" onclick="SwitchDiv(3)" data-toggle="collapse" data-target="#metodo3" aria-expanded=" " aria-controls="metodo3">  
+                    Seção Áurea </button>
                 <div id="metodo3" class="collapse" data-parent="#accordionDiv">
                     <div class="leitura">
                         <form class="form" id="formAurea">
@@ -122,6 +132,7 @@
                                 <label for="precisao3"> Digite a precisao </label>
                                 <input type="text" class="form-control" id="precisao3">
                             </div>
+                            <div class="alert alert-danger" id="alertFormAurea"> Entrada de dados inválida! </div>
                             <button class="btn btn-success btn-block" type="submit"> Iniciar método </button>
                         </form>
                     </div>
@@ -152,6 +163,7 @@
                                 <label for="precisao4"> Digite o intervalo de incerteza (L) </label>
                                 <input type="text" class="form-control" id="precisao4">
                             </div>
+                            <div class="alert alert-danger" id="alertFormFibo"> Entrada de dados inválida! </div>
                             <button class="btn btn-success btn-block"> Iniciar método </button>
                         </form>
                     </div>
@@ -161,8 +173,8 @@
             <h6> Com uso de derivada </h6>
             <hr>
             <div class="accordion" id="derivadaAccordion">
-                <button class="btn btn-warning btn-block" onclick="SwitchDiv(5)" data-toggle="collapse" data-target="#metodo5"> Método da Bisseção </button>
-                <div id="metodo5" class="collapse" data-parent="derivadaAccordion">
+                <button class="btn btn-dark btn-block collapsed" onclick="SwitchDiv(5)" data-toggle="collapse" data-target="#metodo5"> Método da Bisseção </button>
+                <div id="metodo5" class="collapse" data-parent="#derivadaAccordion">
                     <div class="leitura">
                         <form id="formBissecao" class="form">
                             <div class="form-group">
@@ -185,12 +197,13 @@
                                 <label for="precisao5"> Digite a precisão </label>
                                 <input type="float" class="form-control" id="precisao5">
                             </div>
+                            <div class="alert alert-danger" id="alertFormBisse"> Entrada de dados inválida! </div>
                             <button class="btn btn-success btn-block"> Iniciar método </button>
                         </form>
                     </div>
                 </div>
-                <button class="btn btn-warning btn-block" onclick="SwitchDiv(6)" data-toggle="collapse" data-target="#metodo6"> Método de Newton </button>
-                <div id="metodo6" class="collapse" data-parent="derivadaAccordion">
+                <button class="btn btn-dark btn-block" onclick="SwitchDiv(6)" data-toggle="collapse" data-target="#metodo6"> Método de Newton </button>
+                <div id="metodo6" class="collapse" data-parent="#derivadaAccordion">
                     <div class="leitura">
                         <form id="formNewton" class="form">
                             <div class="form-group">
@@ -213,6 +226,7 @@
                                 <label for="precisao6"> Digite a precisão </label>
                                 <input type="float" class="form-control" id="precisao6">
                             </div>
+                            <div class="alert alert-danger" id="alertFormNewton"> Entrada de dados inválida! </div>
                             <button class="btn btn-success btn-block" type="submit"> Iniciar método </button>
                         </form>
                     </div>
@@ -245,7 +259,75 @@
                 <li class="list-group-item"> Método de Newton </li>
             </ul>
 
-            <div class="row space">
+            <h4 class="text-center  mt-5"> Instruções </h4>
+
+            <p> 
+                Na barra lateral estão os botões com o nome de cada método. Quando clicado um pequeno 
+                formulário aparece para que seja feita a inserção dos dados. 
+            </p>
+            <p>
+                Preencha a função no formato <span> f(x) = x ^2 </span> (por exemplo). Coloque os valores do intervalo, onde a busca
+                deve ser feita, e o delta e/ou a precisão. 
+            </p>
+            <p>
+                Caso algo esteja errado, uma mensagem como a seguir irá aparecer: 
+            </p>
+            <div class="alert alert-danger"> Entrada de dados inválida! </div>
+            <p> Caso o inicio seja maior que o final, esses valores serão invertidos. <strong> O delta e/ou a precisão devem estar entre 0 e 1. </strong></p>
+
+            <h6> Exemplos de sala de aula </h6>
+
+            <p> Para preencher automaticamente com os exemplos dados na sala de aula, clique no botão "Exemplos" no lado superior direito
+                que todos os campos dos formulários de todos os métodos serão preenchidos automaticamente. 
+            </p>
+
+            <table class="table table-bordered table-hover">
+                <caption> Exemplos de sala de aula </caption>
+                <thead class="thead-dark">
+                    <tr>
+                        <th> Busca Uniforme </th>
+                        <th> Busca Dicotômica </th>
+                        <th> Método da Seção Áurea</th>
+                        <th> Busca de Fibonacci </th>
+                        <th> Método da Bisseção </th>
+                        <th> Método de Newton </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4" class="text-center math">
+                            <p>  \( f(x) = x^2 + 3x + 2 \)   </p> 
+                            <p> \( s.a: -1 <= x <= 3 \) </p>
+                        </td>
+                        <td>
+                            <p> \( f(x) = x^2 + 2x \)</p> 
+                            <p> \( s.a: -3 <= x <= 6 \)</p>
+                        </td>
+                        <td>
+                            <p>  \( f(x) = e^x - x^3 + 1\) </p> 
+                            <p> \( s.a: -1 <= x <= 6 \) </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p class="mt-3"> <strong> OBS: </strong> Principalmente nos métodos com derivada (Bisseção e Newton)
+                use função de x, nos outros métodos que não usa derivadas é possível usar 
+                outras variáveis, porém o resultado irá motrar as restrições como x .
+             </p>
+
+             <h3 class="text-center mt-5"> Gráficos </h3>
+
+             <p> Do lado do botão de exemplos há um botão gráfico. Após uma função ser computada e ter o ponto minimo
+                 encontrado, é possível ver o gráfico da função e o ponto minimo encontrado. Linhas verticais marcam 
+                o intervalo que foi colocado para a busca ser feita.  </p>
+
+            <img src="./imgs/graficoExemplo.PNG" class="img-fluid" alt="">
+            <small class="text-muted"> Gráfico exemplo </small>
+
+            
+
+            <div class="row mt-5">
                 <div class="col">
                     <h5 class="text-center"> Trabalho feito por: </h5>
                 </div>
@@ -294,7 +376,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-                                        <span id="funcaoObjetivoUni"> Aguardando... </span>
+                                        <span id="funcaoObjetivoUni">  Aguardando... </span> 
                                         <p id="restricaoUni"></p>
                                     </div>
                                     <div class="col">
@@ -354,7 +436,6 @@
                     </div>
                 </div>      
             </div>
-            
         </div>
         <div id="divDico">
             <h1 class="display-4 text-center"> Busca Dicotômica </h1>
@@ -685,8 +766,7 @@
                                 <div class="col">
                                     <div class="row">
                                         <div class="col">Criterios de parada: </div>
-                                        <div class="col"> C1: |f'(x<sub>k</sub>)| < &epsilon; </div>
-                                        <div class="col"> C2: <sup> |x<sub>k+1</sub> - x<sub>k</sub>| </sup> / <sub> max{|x<sub>k+1</sub>|, 1} </sub> < &epsilon; </div>
+                                        <div class="col"> <p> C1: |f'(x<sub>k</sub>)| < &epsilon; </p>  <p> C2: <sup> |x<sub>k+1</sub> - x<sub>k</sub>| </sup> / <sub> max{|x<sub>k+1</sub>|, 1} </sub> < &epsilon; </p> </div>
                                     </div>
                                 </div>
                             </div>
@@ -748,19 +828,22 @@
         </div>
     </section>
 
-    <!-- Modal do gráfico -->
-    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"> Gráfico </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    <div class="container">
+        <!-- Modal do gráfico -->
+        <div class="modal fade bd-modal-lg bd-modal-xl" tabindex="-1" id="chartModal" role="dialog">
+            <div class="modal-dialog modal-lg modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"> Gráfico </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body graficos">
+                        <div id="avisoGrafico"></div>
+                        <div id="plot"></div>
+                    </div>                
                 </div>
-                <div class="modal-body">
-                    <div class="conteudomodal"></div>
-                </div>                
             </div>
         </div>
     </div>
@@ -773,5 +856,6 @@
     
     <script src="./libraries/math.js"></script>
     <script src="./js/script.js"></script>
+    <script src="./js/metodos.js"></script>
     <script src="./js/MostraResultados.js"></script>
 </body>
