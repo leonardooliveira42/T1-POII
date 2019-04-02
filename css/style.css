@@ -48,13 +48,9 @@ header {
 
 /* Estilos do form para iniciar o método */
 .leitura{
-    border: 1px solid lightgray; 
-    border-radius: 10px;
     border-top: 0px;
     padding: 10px;
-    background: white;
     color: black;
-    box-shadow: 3px 4px 9px 0px lightgray;
 }
 
 button{
@@ -68,7 +64,8 @@ button{
 
 /* Estilos para os cards de apresentação dos membros do grupo */
 .card{
-    box-shadow: 2px 3px 4px grey;
+    border: 0px;
+    background: transparent;
 }
 
 /* Ocultando as páginas dos outros métodos */

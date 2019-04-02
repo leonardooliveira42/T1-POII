@@ -170,6 +170,8 @@ function CalculoNewton(k, a, b, der1, der2, e, iteracao) {
     var x0 = a;     // Atribui a ao x da iteração 
     var d1x0 = der1.eval({x: x0});  // Calcula a derivada primeira do x 
     var d2x0 = der2.eval({x: x0});  // Calcula a derivada segunda do x
+
+    console.log(d1x0, d2x0);
     
     // Calcula o proximo x (x1)
     var x1 = x0 - (d1x0 / d2x0);

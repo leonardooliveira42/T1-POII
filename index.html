@@ -31,11 +31,16 @@
         <div class="container">
             <hr>
             <h6> Sem uso de derivada </h6> <hr>
-            <div class="accordion" id="accordionDiv">
-                <!-- ##### Botão da busca uniforme ##### -->
-                    <button class="btn btn-dark btn-block" onclick="SwitchDiv(1)" data-toggle="collapse" data-target="#metodo1" aria-expanded="false" aria-controls="metodo1">  
-                    Busca Uniforme </button>
-                    <div id="metodo1" class="collapse show" data-parent="#accordionDiv">
+            <div class="accordion" id="accordionExample">
+                <!-- Card da busca uniforme -->
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <button class="btn btn-dark  btn-block" onclick="SwitchDiv(1)" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Busca Uniforme
+                        </button>
+                    </div>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
                             <div class="leitura">
                                 <form id="uniforme">
                                     <div class="form-group">
@@ -66,171 +71,217 @@
                                     <button class="btn btn-success btn-block" type="submit"> Iniciar método </button>
                                 </form>
                             </div>
-                    </div> <!-- Fim do método da busca uniforme -->
-                
-                
-                <!-- ##### Botão da busca dicotômica ##### -->
-                <button class="btn btn-dark btn-block" onclick="SwitchDiv(2)" data-toggle="collapse" data-target="#metodo2" aria-expanded="false" aria-controls="metodo2">  
-                    Busca Dicotômica </button> 
-                <div id="metodo2" class="collapse" data-parent="#accordionDiv">
-                    <div class="leitura">
-                        <form id="dicotomica" class="form">
-                            <div class="form-group">
-                                <label for="funcao2"> Digite a função: </label>
-                                <input type="text" class="form-control" id="funcao2" >
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="inicio2"> Inicio </label>
-                                        <input type="text" class="form-control" id="inicio2">
-                                    </div>
-                                    <div class="col">
-                                        <label for="final2"> Final </label>
-                                        <input type="text" class="form-control" id="final2">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="delta2"> Digite o delta: </label>
-                                        <input type="text" class="form-control" id="delta2">
-                                    </div>
-                                    <div class="col">
-                                        <label for="precisao2"> Digite a precisao </label>
-                                        <input type="text" class="form-control" id="precisao2">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="alert alert-danger" id="alertFormDico"> Entrada de dados inválida! </div>
-                            <button class="btn btn-success btn-block" type="submit" > Iniciar método </button>
-                        </form>
+                        </div>
                     </div>
-                </div> <!-- Fim da busca dicotômica -->
-                <!-- ##### Botão da Seção Áuria ##### -->
-                <button class="btn btn-dark btn-block" onclick="SwitchDiv(3)" data-toggle="collapse" data-target="#metodo3" aria-expanded=" " aria-controls="metodo3">  
-                    Seção Áurea </button>
-                <div id="metodo3" class="collapse" data-parent="#accordionDiv">
-                    <div class="leitura">
-                        <form class="form" id="formAurea">
-                            <div class="form-group">
-                                <label for="funcao3"> Digite a função: </label>
-                                <input type="text" class="form-control" id="funcao3">
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="inicio3"> Inicio </label>
-                                        <input type="text" class="form-control" id="inicio3">
-                                    </div>
-                                    <div class="col">
-                                        <label for="final3"> Final </label>
-                                        <input type="text" class="form-control" id="final3">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="precisao3"> Digite a precisao </label>
-                                <input type="text" class="form-control" id="precisao3">
-                            </div>
-                            <div class="alert alert-danger" id="alertFormAurea"> Entrada de dados inválida! </div>
-                            <button class="btn btn-success btn-block" type="submit"> Iniciar método </button>
-                        </form>
+                </div>
+
+                <!-- Card da busca dicotomica -->
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <button class="btn btn-dark btn-block collapsed" onclick="SwitchDiv(2)" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Busca Dicotômica
+                        </button>
                     </div>
-                </div> <!-- Fim da seção áuria -->
-                <!-- ##### Busca de Fibonacci -->
-                <button class="btn btn-dark btn-block" onclick="SwitchDiv(4)" data-toggle="collapse" data-target="#metodo4" aria-expanded=" " aria-controls="metodo4">  
-                    Busca de Fibonacci </button>
-                <div id="metodo4" class="collapse" data-parent="#accordionDiv">
-                    <div class="leitura">
-                        <form id="formFibonacci" class="form">
-                            <div class="form-group">
-                                <label for="funcao4"> Digite a função: </label>
-                                <input type="text" class="form-control" id="funcao4">
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="inicio4"> Inicio </label>
-                                        <input type="text" class="form-control" id="inicio4">
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="leitura">
+                                <form id="dicotomica" class="form">
+                                    <div class="form-group">
+                                        <label for="funcao2"> Digite a função: </label>
+                                        <input type="text" class="form-control" id="funcao2" >
                                     </div>
-                                    <div class="col">
-                                        <label for="final4"> Final </label>
-                                        <input type="text" class="form-control" id="final4">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="inicio2"> Inicio </label>
+                                                <input type="text" class="form-control" id="inicio2">
+                                            </div>
+                                            <div class="col">
+                                                <label for="final2"> Final </label>
+                                                <input type="text" class="form-control" id="final2">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="delta2"> Digite o delta: </label>
+                                                <input type="text" class="form-control" id="delta2">
+                                            </div>
+                                            <div class="col">
+                                                <label for="precisao2"> Digite a precisao </label>
+                                                <input type="text" class="form-control" id="precisao2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-danger" id="alertFormDico"> Entrada de dados inválida! </div>
+                                    <button class="btn btn-success btn-block" type="submit" > Iniciar método </button>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label for="precisao4"> Digite o intervalo de incerteza (L) </label>
-                                <input type="text" class="form-control" id="precisao4">
-                            </div>
-                            <div class="alert alert-danger" id="alertFormFibo"> Entrada de dados inválida! </div>
-                            <button class="btn btn-success btn-block"> Iniciar método </button>
-                        </form>
+                        </div>
                     </div>
-                </div> <!-- Fim da busca fibonacci -->
-            </div> <!-- Fim da div accordion -->
+                </div>
+
+                <!-- Card da seção aurea -->
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <button class="btn btn-dark btn-block collapsed" onclick="SwitchDiv(3)" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Seção Áurea
+                        </button>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="leitura">
+                                <form class="form" id="formAurea">
+                                    <div class="form-group">
+                                        <label for="funcao3"> Digite a função: </label>
+                                        <input type="text" class="form-control" id="funcao3">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="inicio3"> Inicio </label>
+                                                <input type="text" class="form-control" id="inicio3">
+                                            </div>
+                                            <div class="col">
+                                                <label for="final3"> Final </label>
+                                                <input type="text" class="form-control" id="final3">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="precisao3"> Digite a precisao </label>
+                                        <input type="text" class="form-control" id="precisao3">
+                                    </div>
+                                    <div class="alert alert-danger" id="alertFormAurea"> Entrada de dados inválida! </div>
+                                    <button class="btn btn-success btn-block" type="submit"> Iniciar método </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- card da busca de fibonacci -->
+                <div class="card">
+                    <div class="card-header" id="heading4">
+                        <button class="btn btn-dark btn-block collapsed" onclick="SwitchDiv(4)"  type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                        Busca Fibonacci
+                        </button>
+                    </div>
+                    <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="leitura">
+                                <form id="formFibonacci" class="form">
+                                    <div class="form-group">
+                                        <label for="funcao4"> Digite a função: </label>
+                                        <input type="text" class="form-control" id="funcao4">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="inicio4"> Inicio </label>
+                                                <input type="text" class="form-control" id="inicio4">
+                                            </div>
+                                            <div class="col">
+                                                <label for="final4"> Final </label>
+                                                <input type="text" class="form-control" id="final4">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="precisao4"> Digite o intervalo de incerteza (L) </label>
+                                        <input type="text" class="form-control" id="precisao4">
+                                    </div>
+                                    <div class="alert alert-danger" id="alertFormFibo"> Entrada de dados inválida! </div>
+                                    <button class="btn btn-success btn-block"> Iniciar método </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <hr>
             <h6> Com uso de derivada </h6>
             <hr>
-            <div class="accordion" id="derivadaAccordion">
-                <button class="btn btn-dark btn-block collapsed" onclick="SwitchDiv(5)" data-toggle="collapse" data-target="#metodo5"> Método da Bisseção </button>
-                <div id="metodo5" class="collapse" data-parent="#derivadaAccordion">
-                    <div class="leitura">
-                        <form id="formBissecao" class="form">
-                            <div class="form-group">
-                                <label for="funcao5"> Digite a função: </label>
-                                <input type="text" class="form-control" id="funcao5">
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="inicio5"> Inicio </label>
-                                        <input type="float" class="form-control" id="inicio5">
+                <!-- Card do método da bisseção -->
+                <div class="card">
+                    <div class="card-header" id="headingBissecao">
+                    <h2 class="mb-0">
+                        <button class="btn btn-dark btn-block" onclick="SwitchDiv(5)" type="button" data-toggle="collapse" data-target="#collapseBissecao" aria-expanded="true" aria-controls="collapseBissecao">
+                        Método da Bisseção
+                        </button>
+                    </h2>
+                    </div>
+                
+                    <div id="collapseBissecao" class="collapse" aria-labelledby="headingBissecao" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="leitura">
+                                <form id="formBissecao" class="form">
+                                    <div class="form-group">
+                                        <label for="funcao5"> Digite a função: </label>
+                                        <input type="text" class="form-control" id="funcao5">
                                     </div>
-                                    <div class="col">
-                                        <label for="final5"> Final </label>
-                                        <input type="float" class="form-control" id="final5">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="inicio5"> Inicio </label>
+                                                <input type="float" class="form-control" id="inicio5">
+                                            </div>
+                                            <div class="col">
+                                                <label for="final5"> Final </label>
+                                                <input type="float" class="form-control" id="final5">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="form-group">
+                                        <label for="precisao5"> Digite a precisão </label>
+                                        <input type="float" class="form-control" id="precisao5">
+                                    </div>
+                                    <div class="alert alert-danger" id="alertFormBisse"> Entrada de dados inválida! </div>
+                                    <button class="btn btn-success btn-block"> Iniciar método </button>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label for="precisao5"> Digite a precisão </label>
-                                <input type="float" class="form-control" id="precisao5">
-                            </div>
-                            <div class="alert alert-danger" id="alertFormBisse"> Entrada de dados inválida! </div>
-                            <button class="btn btn-success btn-block"> Iniciar método </button>
-                        </form>
+                        </div>
                     </div>
                 </div>
-                <button class="btn btn-dark btn-block" onclick="SwitchDiv(6)" data-toggle="collapse" data-target="#metodo6"> Método de Newton </button>
-                <div id="metodo6" class="collapse" data-parent="#derivadaAccordion">
-                    <div class="leitura">
-                        <form id="formNewton" class="form">
-                            <div class="form-group">
-                                <label for="funcao6"> Digite a função: </label>
-                                <input type="text" class="form-control" id="funcao6">
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="inicio6"> Inicio </label>
-                                        <input type="float" class="form-control" id="inicio6">
+
+                <!-- Card do método de newton -->
+                <div class="card">
+                    <div class="card-header" id="headingNewton">
+                    <h2 class="mb-0">
+                        <button class="btn btn-dark btn-block" onclick="SwitchDiv(6)" type="button" data-toggle="collapse" data-target="#collapseNewton" aria-expanded="false" aria-controls="collapseNewton">
+                        Método de Newton
+                        </button>
+                    </h2>
+                    </div>
+                    <div id="collapseNewton" class="collapse" aria-labelledby="headingNewton" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="leitura">
+                                <form id="formNewton" class="form">
+                                    <div class="form-group">
+                                        <label for="funcao6"> Digite a função: </label>
+                                        <input type="text" class="form-control" id="funcao6">
                                     </div>
-                                    <div class="col">
-                                        <label for="final6"> Final </label>
-                                        <input type="float" class="form-control" id="final6">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="inicio6"> Inicio </label>
+                                                <input type="float" class="form-control" id="inicio6">
+                                            </div>
+                                            <div class="col">
+                                                <label for="final6"> Final </label>
+                                                <input type="float" class="form-control" id="final6">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="form-group">
+                                        <label for="precisao6"> Digite a precisão </label>
+                                        <input type="float" class="form-control" id="precisao6">
+                                    </div>
+                                    <div class="alert alert-danger" id="alertFormNewton"> Entrada de dados inválida! </div>
+                                    <button class="btn btn-success btn-block" type="submit"> Iniciar método </button>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label for="precisao6"> Digite a precisão </label>
-                                <input type="float" class="form-control" id="precisao6">
-                            </div>
-                            <div class="alert alert-danger" id="alertFormNewton"> Entrada de dados inválida! </div>
-                            <button class="btn btn-success btn-block" type="submit"> Iniciar método </button>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
