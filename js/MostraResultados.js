@@ -3,9 +3,11 @@
  function MostraResultadoUniforme(resultado, funcao, minimo, maximo, delta, casas) {
 
     var foiRefinado = false;
+    let parenthesis = 'keep'
+
 
     //Mostrando os dados nos cards 
-    $('#funcaoObjetivoUni').empty(); 
+    $('#funcaoObjetivoUni').empty();
     $('#funcaoObjetivoUni').append('<strong> ' + funcao + ' </strong>');
     $('#restricaoUni').empty(); 
     $('#restricaoUni').append('s.a: ' + minimo + '<= x <= ' + maximo);
@@ -53,7 +55,6 @@
 }   
 
 function MostraResultadoDicotomica(resultado, funcao, minimo, maximo, delta, precisao) {
-
     // Dados essenciais 
     $('#funcaoObjetivoDico').empty(); 
     $('#funcaoObjetivoDico').append('<strong>' + funcao + '</strong>');
@@ -92,7 +93,6 @@ function MostraResultadoDicotomica(resultado, funcao, minimo, maximo, delta, pre
 }
 
 function MostraResultadoAurea(resultado, funcao, minimo, maximo, precisao) {
-    console.log('mostrando os resultados da aurea');
     // Dados essenciais 
     $('#funcaoObjetivoAurea').empty(); 
     $('#funcaoObjetivoAurea').append('<strong>' + funcao + '</strong>');
@@ -128,8 +128,6 @@ function MostraResultadoAurea(resultado, funcao, minimo, maximo, precisao) {
 }
 
 function MostraResultadoFibonacci(resultado, funcao, minimo, maximo, precisao) {
-
-    console.log('mostrando os resultados de fibonacci ');
     // Dados essenciais 
     $('#funcaoObjetivoFibo').empty(); 
     $('#funcaoObjetivoFibo').append('<strong>' + funcao + '</strong>');
@@ -165,7 +163,6 @@ function MostraResultadoFibonacci(resultado, funcao, minimo, maximo, precisao) {
 }
 
 function MostraResultadoBissecao(resultado, funcao, derivada, minimo, maximo, precisao) {
-    console.log('mostrando os resultados de bissecao ');
     // Dados essenciais 
     $('#funcaoObjetivoBisse').empty(); 
     $('#funcaoObjetivoBisse').append('<strong>' + funcao + '</strong>');
@@ -201,7 +198,6 @@ function MostraResultadoBissecao(resultado, funcao, derivada, minimo, maximo, pr
 }
 
 function MostraResultadoNewton(resultado, funcao, derivada1, derivada2, minimo, maximo, precisao) {
-    console.log('mostrando os resultados de newton ');
     // Dados essenciais 
     $('#funcaoObjetivoNewton').empty(); 
     $('#funcaoObjetivoNewton').append('<strong>' + funcao + '</strong>');

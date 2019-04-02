@@ -128,7 +128,6 @@
 
             await BuscaDicotomica(minimo, maximo, delta, precisao)
             .then((res) => {
-                console.log(res);
                 MostraResultadoDicotomica(res ,flida, minimo, maximo, delta, precisao);
                 ultimafuncao = flida;
                 pontoMinimo = res.resultado;
@@ -137,7 +136,6 @@
             });
 
         } catch (e){
-            console.log(e);
             document.getElementById('alertFormDico').style.display = 'block';
         }       
     });
@@ -196,7 +194,6 @@
 
             await SecaoAurea(minimo, maximo, precisao)
             .then((res) => {
-                console.log(res);
                 MostraResultadoAurea(res, flida, minimo, maximo, precisao);
                 ultimafuncao = flida;
                 pontoMinimo = res.resultado;
@@ -204,13 +201,9 @@
                 ultimoMetodo = "Método da Seção Áurea";
             });
         } catch (e) {
-            console.log(e);
             document.getElementById('alertFormAurea').style.display = 'block';
 
         }
-
-        console.log(flida, minimo, maximo, precisao);
-
     })
 
     function SecaoAurea(minimo, maximo, precisao) {
@@ -266,7 +259,6 @@
 
 
             await BuscaFibonacci(minimo, maximo, precisao).then((res) => {
-                console.log(res);
                 MostraResultadoFibonacci(res, flida, minimo, maximo, precisao);
                 ultimafuncao = flida;
                 pontoMinimo = res.resultado;
@@ -275,11 +267,8 @@
                 
             });
         } catch (e) {
-            console.log(e);
             document.getElementById('alertFormFibo').style.display = 'block';
         }
-
-        //console.log(flida, minimo, maximo, precisao);
     });
     
     function BuscaFibonacci(minimo, maximo, precisao){
@@ -368,7 +357,6 @@
                 ultimoMetodo = "Método da Bisseção";
             });
         }catch (e){
-            console.log(e);
             document.getElementById('alertFormBisse').style.display = 'block';
         }
     });
@@ -378,7 +366,6 @@
             var iteratorArray = []; 
             var max = Math.log(precisao/(maximo-minimo)) / Math.log(0.5); 
             max = Math.ceil(max);
-            console.log(max);
             var resultado = CalculoBissecao(0, max, minimo, maximo, derivada, precisao, iteratorArray);
             var object = {
                 iteracoes: iteratorArray, 
@@ -431,8 +418,6 @@
             document.getElementById('alertFormNewton').style.display = 'none';
 
             await Newton(derivada, derivadaSegunda, minimo, maximo, precisao).then(function(res) {
-                console.log(res);
-
                 // Mostra Resultados
                 MostraResultadoNewton(res, flida, derivada, derivadaSegunda, minimo, maximo, precisao);
                 ultimafuncao = flida;
@@ -441,7 +426,6 @@
                 ultimoMetodo = "Método de Newton";
             });
         } catch (e) {
-            console.log(e);
             document.getElementById('alertFormNewton').style.display = 'block';
         }
     });
@@ -450,7 +434,7 @@
         return new Promise(function(resolve, reject) {
 
             var iteratorArray = [];
-            var resultado = CalculoNewton(0, minimo, maximo, derivada1, derivada2, precisao, iteratorArray);
+            var resultado = CalculoNewton(0, minimo, maximo, derivada1, derivada2, precisao, iteratorArray, minimo, maximo);
             var object = {
                 iteracoes: iteratorArray,
                 resultado: resultado
@@ -517,7 +501,6 @@
 
     // Preenchendo os campos com os exemplos da sala de aula 
     document.getElementById('exampleButton').addEventListener('click', function(e) {
-        console.log('opa');
         // Busca Uniforme 
         document.getElementById('funcao1').value = 'f(x) = x^2 -3x +2';
         document.getElementById('inicio1').value = '-1';
@@ -560,7 +543,6 @@
     });
 
     document.getElementById('chartButton').addEventListener('click', function(e) {
-        console.log(ultimafuncao, pontoMinimo, ultimoIntervalo);
         $('#avisoGrafico').empty();
         $('#metodoCalculado').empty();
 
