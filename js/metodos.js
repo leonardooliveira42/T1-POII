@@ -165,11 +165,13 @@ function CalculoBissecao(k, max, a, b, der, e, iteracao) {
 }
 
 // Calculo de newton 
-function CalculoNewton(k, a, b, der1, der2, e, iteracao) {
+function CalculoNewton(k, a, b, der1, der2, e, iteracao, min, max) {
     // é passado por parametro as funções para resolver a derivada primeira e a derivada segunda 
     var x0 = a;     // Atribui a ao x da iteração 
     var d1x0 = der1.eval({x: x0});  // Calcula a derivada primeira do x 
     var d2x0 = der2.eval({x: x0});  // Calcula a derivada segunda do x
+
+    //console.log(der1.toString(), der2.toString());
     
     // Calcula o proximo x (x1)
     var x1 = x0 - (d1x0 / d2x0);
@@ -186,13 +188,19 @@ function CalculoNewton(k, a, b, der1, der2, e, iteracao) {
         d1x1: d1x1
     });
 
-    // Primeiro critério de parada 
-    if(Math.abs(d1x1) > e) {    // Se o módulo da derivada primeira do novo x for maior que a precisão, então continua 
-        // Segundo critério de parada 
-        if(CriterioParadaNewton(x0,x1,e)){  // Se o segundo critério não foi atendido, então chama a função recursivamente com o a recebendo o novo x
-            return CalculoNewton(k++, x1, b, der1, der2, e, iteracao);
-        }else return x1;    // Se o critério for atendido, retorna o novo valor de x
-    } else return x1;       // Se a derivada primeira do novo x for menor que a precisao, retorna o novo valor de x
+    // Se o novo valor estiver fora do intervalo, retorna o valor anterior
+    if(x1 < min || x1 > max) {
+        console.log('fora do intervalo');
+        return x0;
+    } else {
+        // Primeiro critério de parada 
+        if(Math.abs(d1x1) > e) {    // Se o módulo da derivada primeira do novo x for maior que a precisão, então continua 
+            // Segundo critério de parada 
+            if(CriterioParadaNewton(x0,x1,e)){  // Se o segundo critério não foi atendido, então chama a função recursivamente com o a recebendo o novo x
+                return CalculoNewton(k++, x1, b, der1, der2, e, iteracao, min, max);
+            }else return x1;    // Se o critério for atendido, retorna o novo valor de x
+        } else return x1;       // Se a derivada primeira do novo x for menor que a precisao, retorna o novo valor de x
+    }
 }
 
 
