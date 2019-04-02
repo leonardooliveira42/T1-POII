@@ -3,9 +3,7 @@
  function MostraResultadoUniforme(resultado, funcao, minimo, maximo, delta, casas) {
 
     var foiRefinado = false;
-    let parenthesis = 'keep'
-
-
+    
     //Mostrando os dados nos cards 
     $('#funcaoObjetivoUni').empty();
     $('#funcaoObjetivoUni').append('<strong> ' + funcao + ' </strong>');
