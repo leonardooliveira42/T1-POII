@@ -7,6 +7,7 @@
     var ultimafuncao = null; 
     var pontoMinimo = null;
     var ultimoIntervalo = null;
+    var ultimoMetodo = null;
 
     /** Busca Uniforme  */
     $('#uniforme').submit(async function(e) {
@@ -62,6 +63,7 @@
                 ultimafuncao = flida;
                 pontoMinimo = resultado.resultado;
                 ultimoIntervalo = {a: minimo, b: maximo};
+                ultimoMetodo = "Busca Uniforme";
             });     
         }catch (e) {
             console.log(e);
@@ -131,6 +133,7 @@
                 ultimafuncao = flida;
                 pontoMinimo = res.resultado;
                 ultimoIntervalo = {a: minimo, b: maximo};
+                ultimoMetodo = "Busca Dicotômica";
             });
 
         } catch (e){
@@ -198,6 +201,7 @@
                 ultimafuncao = flida;
                 pontoMinimo = res.resultado;
                 ultimoIntervalo = {a: minimo, b: maximo};
+                ultimoMetodo = "Método da Seção Áurea";
             });
         } catch (e) {
             console.log(e);
@@ -267,6 +271,7 @@
                 ultimafuncao = flida;
                 pontoMinimo = res.resultado;
                 ultimoIntervalo = {a: minimo, b: maximo};
+                ultimoMetodo = "Busca de Fibonacci";
                 
             });
         } catch (e) {
@@ -360,6 +365,7 @@
                 ultimafuncao = flida;
                 pontoMinimo = res.resultado;
                 ultimoIntervalo = {a: minimo, b: maximo};
+                ultimoMetodo = "Método da Bisseção";
             });
         }catch (e){
             console.log(e);
@@ -432,6 +438,7 @@
                 ultimafuncao = flida;
                 pontoMinimo = res.resultado;
                 ultimoIntervalo = {a: minimo, b: maximo};
+                ultimoMetodo = "Método de Newton";
             });
         } catch (e) {
             console.log(e);
@@ -555,12 +562,14 @@
     document.getElementById('chartButton').addEventListener('click', function(e) {
         console.log(ultimafuncao, pontoMinimo, ultimoIntervalo);
         $('#avisoGrafico').empty();
+        $('#metodoCalculado').empty();
 
         if(ultimafuncao == null){
             $('#avisoGrafico').append('<div class="alert alert-warning"> Nenhuma função foi computada ainda </div>');
         } else{
             var fun = ultimafuncao.split('=');
             $('#avisoGrafico').append('<div class="alert alert-info"> As linhas verticais indicam o intervalo especificado. </div>');
+            $('#metodoCalculado').append('' + ultimoMetodo + '');
             // Gerando um array com valores de x y 
             Draw(fun[1], ultimoIntervalo.a, ultimoIntervalo.b);
             
