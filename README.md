@@ -1,7 +1,7 @@
 # Trabalho de Pesquisa Operacional II
 
 <div style="display: flex; justify-content: center; gap: 20px">
-  <img style="width: 60%" src="imgs/t1-poii.png" alt="Exemplo imagem">
+  <img style="width: 60%" src="https://raw.githubusercontent.com/leonardooliveira42/T1-POII/master/imgs/t1-poII.png" alt="Exemplo imagem">
 </div>
 
 
@@ -44,7 +44,7 @@ Ao selecionar um dos métodos na sidebar lateral, um exemplo pode ser visualizad
 Também é possível visualizar gráficos dos métodos selecionados: 
 
 <div style="display: flex; justify-content: center; gap: 20px">
-  <img style="width: 60%" src="imgs/t1-poii-2.png" alt="Exemplo imagem">
+  <img style="width: 60%" src="https://raw.githubusercontent.com/leonardooliveira42/T1-POII/master/imgs/t1-poII-2.png" alt="Exemplo imagem">
 </div>
 
 
