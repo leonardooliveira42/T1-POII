@@ -1,108 +1,65 @@
-# Nome do projeto
+# Trabalho de Pesquisa Operacional II
 
-![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/iuricode/README-template?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
+<div style="display: flex; justify-content: center; gap: 20px">
+  <img style="width: 60%" src="imgs/t1-poii.png" alt="Exemplo imagem">
+</div>
 
-<img src="imagem.png" alt="Exemplo imagem">
 
-> Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
+<div style="display: flex; justify-content: center; gap: 20px; margin-top:40px;" >
 
-### Ajustes e melhorias
+[![HTML](https://img.shields.io/badge/HTML-Code?style=for-the-badge&logo=html5&logoColor=white&color=4285F4)](https://www.w3.org/html/)
+[![CSS](https://img.shields.io/badge/CSS-Code?style=for-the-badge&logo=css3&logoColor=white&color=1572B6)](https://www.w3.org/Style/CSS/)
+[![Javascript][Javascript.com]][Javascript]
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-Code?style=for-the-badge&logo=bootstrap&logoColor=white&color=7952B3)](https://getbootstrap.com/)
 
-O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
+</div>
 
-- [x] Tarefa 1
-- [x] Tarefa 2
-- [x] Tarefa 3
-- [ ] Tarefa 4
-- [ ] Tarefa 5
+
+
+
+## Sobre o projeto 
+
+Este é um trabalho desenvolvido na matéria de Pesquisa Operacional II
+do 5º termo do curso de Bacharel em Ciência da Computação (BCC) da
+UNESP "Julio de Mesquita Filho" do campus de Bauru, ministrada pela
+professora Dra. Marcia A. Zanoli Meira e Silva.
+
+O objetivo do projeto é disponibilizar alguns métodos de Programação não Linear para Otimização Monovariavel. 
+
+## Métodos de otimização 
+Segue a lista de métodos programados e disponibilzados nesse projeto:
+
+- Sem o uso de derivada 
+  - Busca Uniforme 
+  - Busca Dicotômica 
+  - Seção Áurea
+  - Busca Fibonacci
+- Com o Uso de derivada
+  - Método da Bisseção 
+  - Método de Newton 
+
+
+Ao selecionar um dos métodos na sidebar lateral, um exemplo pode ser visualizado clicando no botão exemplos na barra superior do projeto.
+
+Também é possível visualizar gráficos dos métodos selecionados: 
+
+<div style="display: flex; justify-content: center; gap: 20px">
+  <img style="width: 60%" src="imgs/t1-poii-2.png" alt="Exemplo imagem">
+</div>
+
+
 
 ## 💻 Pré-requisitos
 
-Antes de começar, verifique se você atendeu aos seguintes requisitos:
+Pra rodar o projeto na máquina é possível utilizar: 
 
-- Você instalou a versão mais recente de `<linguagem / dependência / requeridos>`
-- Você tem uma máquina `<Windows / Linux / Mac>`. Indique qual sistema operacional é compatível / não compatível.
-- Você leu `<guia / link / documentação_relacionada_ao_projeto>`.
+- Extensão do vscode [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+- Tendo node.js na máquina versão superior a 14 e rodar `npx lite-server`
 
-## 🚀 Instalando <nome_do_projeto>
 
-Para instalar o <nome_do_projeto>, siga estas etapas:
 
-Linux e macOS:
+[Javascript.com]: https://img.shields.io/badge/Javascript-Code?style=for-the-badge&logo=javascript&logoColor=yellow&color=white
+[Javascript]: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript
 
-```
-<comando_de_instalação>
-```
-
-Windows:
-
-```
-<comando_de_instalação>
-```
-
-## ☕ Usando <nome_do_projeto>
-
-Para usar <nome_do_projeto>, siga estas etapas:
-
-```
-<exemplo_de_uso>
-```
-
-Adicione comandos de execução e exemplos que você acha que os usuários acharão úteis. Fornece uma referência de opções para pontos de bônus!
-
-## 📫 Contribuindo para <nome_do_projeto>
-
-Para contribuir com <nome_do_projeto>, siga estas etapas:
-
-1. Bifurque este repositório.
-2. Crie um branch: `git checkout -b <nome_branch>`.
-3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
-4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
-5. Crie a solicitação de pull.
-
-Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
-
-## 🤝 Colaboradores
-
-Agradecemos às seguintes pessoas que contribuíram para este projeto:
-
-<table>
-  <tr>
-    <td align="center">
-      <a href="#" title="defina o titulo do link">
-        <img src="https://avatars3.githubusercontent.com/u/31936044" width="100px;" alt="Foto do Iuri Silva no GitHub"/><br>
-        <sub>
-          <b>Iuri Silva</b>
-        </sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="#" title="defina o titulo do link">
-        <img src="https://s2.glbimg.com/FUcw2usZfSTL6yCCGj3L3v3SpJ8=/smart/e.glbimg.com/og/ed/f/original/2019/04/25/zuckerberg_podcast.jpg" width="100px;" alt="Foto do Mark Zuckerberg"/><br>
-        <sub>
-          <b>Mark Zuckerberg</b>
-        </sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="#" title="defina o titulo do link">
-        <img src="https://miro.medium.com/max/360/0*1SkS3mSorArvY9kS.jpg" width="100px;" alt="Foto do Steve Jobs"/><br>
-        <sub>
-          <b>Steve Jobs</b>
-        </sub>
-      </a>
-    </td>
-  </tr>
-</table>
-
-## 😄 Seja um dos contribuidores
-
-Quer fazer parte desse projeto? Clique [AQUI](CONTRIBUTING.md) e leia como contribuir.
-
-## 📝 Licença
-
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
+[Javascript.com]: https://img.shields.io/badge/Javascript-Code?style=for-the-badge&logo=javascript&logoColor=yellow&color=white
+[Javascript]: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript
