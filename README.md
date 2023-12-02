@@ -1,11 +1,12 @@
 # Trabalho de Pesquisa Operacional II
 
-<div style="display: flex; justify-content: center; gap: 20px">
+<div align="center">
   <img style="width: 60%" src="https://raw.githubusercontent.com/leonardooliveira42/T1-POII/master/imgs/t1-poII.png" alt="Exemplo imagem">
 </div>
 
+<br />
 
-<div style="display: flex; justify-content: center; gap: 20px; margin-top:40px;" >
+<div align="center" >
 
 [![HTML](https://img.shields.io/badge/HTML-Code?style=for-the-badge&logo=html5&logoColor=white&color=4285F4)](https://www.w3.org/html/)
 [![CSS](https://img.shields.io/badge/CSS-Code?style=for-the-badge&logo=css3&logoColor=white&color=1572B6)](https://www.w3.org/Style/CSS/)
@@ -43,7 +44,7 @@ Ao selecionar um dos métodos na sidebar lateral, um exemplo pode ser visualizad
 
 Também é possível visualizar gráficos dos métodos selecionados: 
 
-<div style="display: flex; justify-content: center; gap: 20px">
+<div align="center">
   <img style="width: 60%" src="https://raw.githubusercontent.com/leonardooliveira42/T1-POII/master/imgs/t1-poII-2.png" alt="Exemplo imagem">
 </div>
 
